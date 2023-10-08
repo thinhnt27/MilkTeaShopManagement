@@ -35,6 +35,8 @@
             logoutToolStripMenuItem = new ToolStripMenuItem();
             panel2 = new Panel();
             lsvBill = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
             panel3 = new Panel();
             cbSwitchTable = new ComboBox();
             btnSwitchTable = new Button();
@@ -47,6 +49,8 @@
             cbFood = new ComboBox();
             cbCategory = new ComboBox();
             flpTable = new FlowLayoutPanel();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -104,11 +108,22 @@
             // 
             // lsvBill
             // 
+            lsvBill.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            lsvBill.GridLines = true;
             lsvBill.Location = new Point(3, 3);
             lsvBill.Name = "lsvBill";
             lsvBill.Size = new Size(364, 275);
             lsvBill.TabIndex = 0;
             lsvBill.UseCompatibleStateImageBehavior = false;
+            lsvBill.View = View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Tên món";
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Số lượng";
             // 
             // panel3
             // 
@@ -212,10 +227,19 @@
             // 
             // flpTable
             // 
+            flpTable.AutoScroll = true;
             flpTable.Location = new Point(12, 31);
             flpTable.Name = "flpTable";
             flpTable.Size = new Size(429, 456);
             flpTable.TabIndex = 5;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Đơn giá";
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Thành tiền";
             // 
             // fTableManager
             // 
@@ -261,5 +285,9 @@
         private Button btnDiscount;
         private ToolStripMenuItem logoutToolStripMenuItem;
         private ToolStripMenuItem personalInformationToolStripMenuItem;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
     }
 }

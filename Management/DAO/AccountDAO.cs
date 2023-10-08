@@ -19,9 +19,9 @@ namespace Management.DAO
 
         public bool Login(string userName, string password) 
         {
-            string query = "Select * from dbo.Account where Username = N'"+ userName + "' and Password = N'" + password+ "'";
+            string query = "USP_Login @userName , @passWord";
 
-            DataTable result = DataProvider.Instance.ExecuteQuery(query);
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, password });
 
             return result.Rows.Count > 0;
         }
