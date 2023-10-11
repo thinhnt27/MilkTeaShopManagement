@@ -21,6 +21,11 @@ namespace Management.DAO
         public static int TableHeight = 80;
         private TableDAO() { }
 
+        public void SwitchTable (int id1, int id2)
+        {
+            DataProvider.Instance.ExecuteQuery("USP_SwitchTable @idTable1 , @idTable2 ", new object[] {id1,id2});
+        }
+
         public List<Table> LoadTableList()
         {
             List<Table> tableList = new List<Table>();

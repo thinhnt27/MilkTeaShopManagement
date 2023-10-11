@@ -1,4 +1,5 @@
 using Management.DAO;
+using Management.DTO;
 
 namespace Management
 {
@@ -15,7 +16,8 @@ namespace Management
             string password = txbPassword.Text;
             if (Login(userName, password))
             {
-                fTableManager fTableManager = new fTableManager();
+                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);  
+                fTableManager fTableManager = new fTableManager(loginAccount);
                 this.Hide();
                 fTableManager.ShowDialog();
                 this.Show();

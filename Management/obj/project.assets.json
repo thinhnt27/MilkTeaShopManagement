@@ -470,19 +470,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ivor\\.nuget\\packages\\": {}
+    "C:\\Users\\tienv\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj",
+      "projectUniqueName": "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj",
       "projectName": "Management",
-      "projectPath": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj",
-      "packagesPath": "C:\\Users\\Ivor\\.nuget\\packages\\",
-      "outputPath": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\obj\\",
+      "projectPath": "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj",
+      "packagesPath": "C:\\Users\\tienv\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ivor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tienv\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -532,7 +532,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
