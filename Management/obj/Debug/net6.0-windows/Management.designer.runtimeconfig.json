@@ -12,8 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\tienv\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\tienv\\.nuget\\packages"
+      "C:\\Users\\ACER\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\ACER\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

@@ -18,7 +18,7 @@ namespace Management.DAO
             get {  if (instance == null) instance = new DataProvider(); return DataProvider.instance; } 
             private set => instance = value; 
         }
-        private string connectionStr = "Data Source=.\\SQLEXPRESS;Initial Catalog = QuanLiCafe; Integrated Security = True";
+        private string connectionStr = "Data Source=.\\HAUFPT;Initial Catalog = QuanLiCafe; Integrated Security = True";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

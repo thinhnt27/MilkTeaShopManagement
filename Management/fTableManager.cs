@@ -71,7 +71,7 @@ namespace Management
                 btn.Tag = item;
                 switch (item.Status)
                 {
-                    case "Empty":
+                    case "Trống":
                         btn.BackColor = Color.White;
                         break;
                     default:
@@ -141,10 +141,42 @@ namespace Management
 
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fAdmin fAdmin = new fAdmin();
-            fAdmin.ShowDialog();
+            fAdmin f = new fAdmin();
+            f.loginAccount = loginAccount;
+            f.InsertFood += f_InsertFood;
+            f.DeleteFood += f_DeleteFood;
+            f.UpdateFood += f_UpdateFood;
+            f.ShowDialog();
         }
 
+       
+
+        void f_UpdateFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
+            if(lsvBill.Tag!= null)
+            ShowBill((lsvBill.Tag as Table).ID);
+        }
+        void f_DeleteFood(object sender, EventArgs e) {
+            LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+        void f_InsertFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        
+
+       
+
+        
+
+        
 
         private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -175,6 +207,11 @@ namespace Management
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+            if (table == null)
+            {
+                MessageBox.Show("Hãy chọn bàn");
+                return;
+            }
             int idBill = BillDAO.Instance.GetUnCheckBillIDByTableID(table.ID);
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
