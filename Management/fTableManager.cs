@@ -116,6 +116,15 @@ namespace Management
         #endregion
 
         #region Events
+        private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCheckout_Click(this,new EventArgs());
+        }
+
+        private void thêmMónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddFood_Click(this, new EventArgs());
+        }
         private void btn_Click(object sender, EventArgs e)
         {
             int tableId = ((sender as Button).Tag as Table).ID;
@@ -149,15 +158,16 @@ namespace Management
             f.ShowDialog();
         }
 
-       
+
 
         void f_UpdateFood(object sender, EventArgs e)
         {
             LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
-            if(lsvBill.Tag!= null)
-            ShowBill((lsvBill.Tag as Table).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
-        void f_DeleteFood(object sender, EventArgs e) {
+        void f_DeleteFood(object sender, EventArgs e)
+        {
             LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
             if (lsvBill.Tag != null)
                 ShowBill((lsvBill.Tag as Table).ID);
@@ -170,13 +180,13 @@ namespace Management
                 ShowBill((lsvBill.Tag as Table).ID);
         }
 
-        
 
-       
 
-        
 
-        
+
+
+
+
 
         private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -241,7 +251,7 @@ namespace Management
             Table table = lsvBill.Tag as Table;
             int idBill = BillDAO.Instance.GetUnCheckBillIDByTableID(table.ID);
             int discount = (int)nmDiscount.Value;
-            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
+            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(' ')[0].Replace(".", ""));
             double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
             if (idBill != -1)
             {
@@ -270,6 +280,7 @@ namespace Management
 
         #endregion
 
+        
     }
 
 }

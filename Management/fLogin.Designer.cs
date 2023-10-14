@@ -132,7 +132,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnExit;
-            ClientSize = new Size(502, 205);
+            ClientSize = new Size(522, 228);
             Controls.Add(panel1);
             Name = "fLogin";
             StartPosition = FormStartPosition.CenterScreen;

@@ -31,6 +31,11 @@
             tcAdmin = new TabControl();
             tpBill = new TabPage();
             panel2 = new Panel();
+            txbPageBill = new TextBox();
+            btnNextBillPage = new Button();
+            btnPreviousBillPage = new Button();
+            btnLastBillPage = new Button();
+            btnFirstBillPage = new Button();
             dtgvBill = new DataGridView();
             panel1 = new Panel();
             btnViewBill = new Button();
@@ -112,6 +117,7 @@
             btnEditAccount = new Button();
             btnDeleteAccount = new Button();
             btnAddAccount = new Button();
+            tabPage1 = new TabPage();
             tcAdmin.SuspendLayout();
             tpBill.SuspendLayout();
             panel2.SuspendLayout();
@@ -161,6 +167,7 @@
             tcAdmin.Controls.Add(tpFoodCategory);
             tcAdmin.Controls.Add(tpTable);
             tcAdmin.Controls.Add(tpAcount);
+            tcAdmin.Controls.Add(tabPage1);
             tcAdmin.Location = new Point(12, 12);
             tcAdmin.Name = "tcAdmin";
             tcAdmin.SelectedIndex = 0;
@@ -182,11 +189,67 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(txbPageBill);
+            panel2.Controls.Add(btnNextBillPage);
+            panel2.Controls.Add(btnPreviousBillPage);
+            panel2.Controls.Add(btnLastBillPage);
+            panel2.Controls.Add(btnFirstBillPage);
             panel2.Controls.Add(dtgvBill);
             panel2.Location = new Point(6, 47);
             panel2.Name = "panel2";
             panel2.Size = new Size(746, 418);
             panel2.TabIndex = 1;
+            // 
+            // txbPageBill
+            // 
+            txbPageBill.Location = new Point(300, 377);
+            txbPageBill.Name = "txbPageBill";
+            txbPageBill.ReadOnly = true;
+            txbPageBill.Size = new Size(125, 27);
+            txbPageBill.TabIndex = 5;
+            txbPageBill.Text = "1";
+            txbPageBill.TextAlign = HorizontalAlignment.Center;
+            txbPageBill.TextChanged += txbPageBill_TextChanged;
+            // 
+            // btnNextBillPage
+            // 
+            btnNextBillPage.Location = new Point(551, 377);
+            btnNextBillPage.Name = "btnNextBillPage";
+            btnNextBillPage.Size = new Size(93, 38);
+            btnNextBillPage.TabIndex = 4;
+            btnNextBillPage.Text = "Next";
+            btnNextBillPage.UseVisualStyleBackColor = true;
+            btnNextBillPage.Click += btnNextBillPage_Click;
+            // 
+            // btnPreviousBillPage
+            // 
+            btnPreviousBillPage.Location = new Point(102, 377);
+            btnPreviousBillPage.Name = "btnPreviousBillPage";
+            btnPreviousBillPage.Size = new Size(93, 38);
+            btnPreviousBillPage.TabIndex = 3;
+            btnPreviousBillPage.Text = "Previous";
+            btnPreviousBillPage.UseVisualStyleBackColor = true;
+            btnPreviousBillPage.Click += btnPreviousBillPage_Click;
+            // 
+            // btnLastBillPage
+            // 
+            btnLastBillPage.Location = new Point(650, 377);
+            btnLastBillPage.Name = "btnLastBillPage";
+            btnLastBillPage.Size = new Size(93, 38);
+            btnLastBillPage.TabIndex = 2;
+            btnLastBillPage.Text = "Last";
+            btnLastBillPage.UseVisualStyleBackColor = true;
+            btnLastBillPage.Click += btnLastBillPage_Click;
+            // 
+            // btnFirstBillPage
+            // 
+            btnFirstBillPage.Location = new Point(3, 377);
+            btnFirstBillPage.Name = "btnFirstBillPage";
+            btnFirstBillPage.Size = new Size(93, 38);
+            btnFirstBillPage.TabIndex = 1;
+            btnFirstBillPage.Text = "First";
+            btnFirstBillPage.UseVisualStyleBackColor = true;
+            btnFirstBillPage.Click += btnFirstBillPage_Click;
             // 
             // dtgvBill
             // 
@@ -196,7 +259,7 @@
             dtgvBill.Name = "dtgvBill";
             dtgvBill.RowHeadersWidth = 51;
             dtgvBill.RowTemplate.Height = 29;
-            dtgvBill.Size = new Size(740, 412);
+            dtgvBill.Size = new Size(740, 368);
             dtgvBill.TabIndex = 0;
             // 
             // panel1
@@ -952,6 +1015,16 @@
             btnAddAccount.UseVisualStyleBackColor = true;
             btnAddAccount.Click += btnAddAccount_Click;
             // 
+            // tabPage1
+            // 
+            tabPage1.Location = new Point(4, 29);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(758, 468);
+            tabPage1.TabIndex = 5;
+            tabPage1.Text = "Report";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
             // fAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -963,6 +1036,7 @@
             tcAdmin.ResumeLayout(false);
             tpBill.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvBill).EndInit();
             panel1.ResumeLayout(false);
             tpFood.ResumeLayout(false);
@@ -1106,5 +1180,11 @@
         private Button btnAddAccount;
         private PaintEventHandler panel6_Paint;
         private NumericUpDown nudType;
+        private TextBox txbPageBill;
+        private Button btnNextBillPage;
+        private Button btnPreviousBillPage;
+        private Button btnLastBillPage;
+        private Button btnFirstBillPage;
+        private TabPage tabPage1;
     }
 }

@@ -16,7 +16,7 @@ namespace Management
             string password = txbPassword.Text;
             if (Login(userName, password))
             {
-                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);  
+                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
                 fTableManager fTableManager = new fTableManager(loginAccount);
                 this.Hide();
                 fTableManager.ShowDialog();
@@ -26,11 +26,11 @@ namespace Management
             {
                 MessageBox.Show("Sai tên ??ng nh?p ho?c tài kho?n");
             }
-            
+
         }
         bool Login(string userName, string password)
         {
-            return AccountDAO.Instance.Login(userName,password);
+            return AccountDAO.Instance.Login(userName, password);
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
