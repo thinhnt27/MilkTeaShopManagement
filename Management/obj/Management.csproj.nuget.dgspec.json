@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj": {}
+    "C:\\Users\\sontv\\Documents\\Desktop\\PROJECT_PRN211\\MilkTeaShopManagement\\Management\\Management.csproj": {}
   },
   "projects": {
-    "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj": {
+    "C:\\Users\\sontv\\Documents\\Desktop\\PROJECT_PRN211\\MilkTeaShopManagement\\Management\\Management.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj",
+        "projectUniqueName": "C:\\Users\\sontv\\Documents\\Desktop\\PROJECT_PRN211\\MilkTeaShopManagement\\Management\\Management.csproj",
         "projectName": "Management",
-        "projectPath": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj",
-        "packagesPath": "C:\\Users\\Ivor\\.nuget\\packages\\",
-        "outputPath": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\obj\\",
+        "projectPath": "C:\\Users\\sontv\\Documents\\Desktop\\PROJECT_PRN211\\MilkTeaShopManagement\\Management\\Management.csproj",
+        "packagesPath": "C:\\Users\\sontv\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sontv\\Documents\\Desktop\\PROJECT_PRN211\\MilkTeaShopManagement\\Management\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ivor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sontv\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
