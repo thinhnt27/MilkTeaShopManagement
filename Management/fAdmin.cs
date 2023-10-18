@@ -337,7 +337,8 @@ namespace Management
             txbPageBill.Text = page.ToString();
         }
 
-        private event EventHandler insertFood;
+    
+       private event EventHandler insertFood;
         public event EventHandler InsertFood
         {
             add

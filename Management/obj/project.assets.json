@@ -470,19 +470,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+    "C:\\Users\\sontv\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FPT-Ky5\\PRN191\\Project\\MilkTeaShopManagement\\Management\\Management.csproj",
+      "projectUniqueName": "C:\\Users\\sontv\\Documents\\Desktop\\CCC\\GIT\\MilkTeaShopManagement\\Management\\Management.csproj",
       "projectName": "Management",
-      "projectPath": "D:\\FPT-Ky5\\PRN191\\Project\\MilkTeaShopManagement\\Management\\Management.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\FPT-Ky5\\PRN191\\Project\\MilkTeaShopManagement\\Management\\obj\\",
+      "projectPath": "C:\\Users\\sontv\\Documents\\Desktop\\CCC\\GIT\\MilkTeaShopManagement\\Management\\Management.csproj",
+      "packagesPath": "C:\\Users\\sontv\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sontv\\Documents\\Desktop\\CCC\\GIT\\MilkTeaShopManagement\\Management\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sontv\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

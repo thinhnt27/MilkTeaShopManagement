@@ -118,6 +118,7 @@
             btnDeleteAccount = new Button();
             btnAddAccount = new Button();
             tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
             tcAdmin.SuspendLayout();
             tpBill.SuspendLayout();
             panel2.SuspendLayout();
@@ -168,6 +169,7 @@
             tcAdmin.Controls.Add(tpTable);
             tcAdmin.Controls.Add(tpAcount);
             tcAdmin.Controls.Add(tabPage1);
+            tcAdmin.Controls.Add(tabPage2);
             tcAdmin.Location = new Point(12, 12);
             tcAdmin.Name = "tcAdmin";
             tcAdmin.SelectedIndex = 0;
@@ -261,6 +263,7 @@
             dtgvBill.RowTemplate.Height = 29;
             dtgvBill.Size = new Size(740, 368);
             dtgvBill.TabIndex = 0;
+         
             // 
             // panel1
             // 
@@ -1022,8 +1025,18 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(758, 468);
             tabPage1.TabIndex = 5;
-            tabPage1.Text = "Report";
+            tabPage1.Text = "   Kho";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(758, 468);
+            tabPage2.TabIndex = 6;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // fAdmin
             // 
@@ -1186,5 +1199,6 @@
         private Button btnLastBillPage;
         private Button btnFirstBillPage;
         private TabPage tabPage1;
+        private TabPage tabPage2;
     }
 }
