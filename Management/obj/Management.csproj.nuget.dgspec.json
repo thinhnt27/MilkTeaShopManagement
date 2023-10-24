@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj": {}
+    "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj": {
+    "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj",
+        "projectUniqueName": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj",
         "projectName": "Management",
-        "projectPath": "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj",
-        "packagesPath": "C:\\Users\\tienv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tienv\\Downloads\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\obj\\",
+        "projectPath": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\Management.csproj",
+        "packagesPath": "C:\\Users\\Ivor\\.nuget\\packages\\",
+        "outputPath": "D:\\Thinh\\Term5\\PRN211\\Assignment\\Management\\Management\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\tienv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ivor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
