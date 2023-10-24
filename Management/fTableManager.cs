@@ -71,7 +71,7 @@ namespace Management
                 btn.Tag = item;
                 switch (item.Status)
                 {
-                    case "Empty":
+                    case "Trống":
                         btn.BackColor = Color.White;
                         break;
                     default:
@@ -116,6 +116,15 @@ namespace Management
         #endregion
 
         #region Events
+        private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCheckout_Click(this,new EventArgs());
+        }
+
+        private void thêmMónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddFood_Click(this, new EventArgs());
+        }
         private void btn_Click(object sender, EventArgs e)
         {
             int tableId = ((sender as Button).Tag as Table).ID;
@@ -141,9 +150,42 @@ namespace Management
 
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fAdmin fAdmin = new fAdmin();
-            fAdmin.ShowDialog();
+            fAdmin f = new fAdmin();
+            f.loginAccount = loginAccount;
+            f.InsertFood += f_InsertFood;
+            f.DeleteFood += f_DeleteFood;
+            f.UpdateFood += f_UpdateFood;
+            f.ShowDialog();
         }
+
+
+
+        void f_UpdateFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+        void f_DeleteFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+        void f_InsertFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategory((cbCategory.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+
+
+
+
+
+
 
 
         private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
@@ -175,6 +217,11 @@ namespace Management
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+            if (table == null)
+            {
+                MessageBox.Show("Hãy chọn bàn");
+                return;
+            }
             int idBill = BillDAO.Instance.GetUnCheckBillIDByTableID(table.ID);
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
@@ -204,7 +251,7 @@ namespace Management
             Table table = lsvBill.Tag as Table;
             int idBill = BillDAO.Instance.GetUnCheckBillIDByTableID(table.ID);
             int discount = (int)nmDiscount.Value;
-            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
+            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(' ')[0].Replace(".", ""));
             double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
             if (idBill != -1)
             {
@@ -233,6 +280,7 @@ namespace Management
 
         #endregion
 
+        
     }
 
 }

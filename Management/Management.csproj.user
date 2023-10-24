@@ -10,7 +10,16 @@
     <Compile Update="fLogin.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fProductDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fTableManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fWareHouse.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

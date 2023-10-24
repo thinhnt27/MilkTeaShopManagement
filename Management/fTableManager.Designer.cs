@@ -53,6 +53,9 @@
             cbFood = new ComboBox();
             cbCategory = new ComboBox();
             flpTable = new FlowLayoutPanel();
+            chứcNăngToolStripMenuItem = new ToolStripMenuItem();
+            thanhToánToolStripMenuItem = new ToolStripMenuItem();
+            thêmMónToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -65,18 +68,17 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { adminToolStripMenuItem, infomationAccountToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { adminToolStripMenuItem, infomationAccountToolStripMenuItem, chứcNăngToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(9, 3, 0, 3);
-            menuStrip1.Size = new Size(1239, 40);
+            menuStrip1.Size = new Size(826, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
             // adminToolStripMenuItem
             // 
             adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            adminToolStripMenuItem.Size = new Size(92, 34);
+            adminToolStripMenuItem.Size = new Size(67, 24);
             adminToolStripMenuItem.Text = "Admin";
             adminToolStripMenuItem.Click += adminToolStripMenuItem_Click;
             // 
@@ -84,41 +86,39 @@
             // 
             infomationAccountToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { personalInformationToolStripMenuItem, logoutToolStripMenuItem });
             infomationAccountToolStripMenuItem.Name = "infomationAccountToolStripMenuItem";
-            infomationAccountToolStripMenuItem.Size = new Size(223, 34);
+            infomationAccountToolStripMenuItem.Size = new Size(159, 24);
             infomationAccountToolStripMenuItem.Text = "Information Account";
             infomationAccountToolStripMenuItem.Click += infomationAccountToolStripMenuItem_Click;
             // 
             // personalInformationToolStripMenuItem
             // 
             personalInformationToolStripMenuItem.Name = "personalInformationToolStripMenuItem";
-            personalInformationToolStripMenuItem.Size = new Size(324, 40);
+            personalInformationToolStripMenuItem.Size = new Size(229, 26);
             personalInformationToolStripMenuItem.Text = "Personal Information";
             personalInformationToolStripMenuItem.Click += personalInformationToolStripMenuItem_Click;
             // 
             // logoutToolStripMenuItem
             // 
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            logoutToolStripMenuItem.Size = new Size(324, 40);
+            logoutToolStripMenuItem.Size = new Size(229, 26);
             logoutToolStripMenuItem.Text = "Logout";
             logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
             // 
             // panel2
             // 
             panel2.Controls.Add(lsvBill);
-            panel2.Location = new Point(530, 168);
-            panel2.Margin = new Padding(4);
+            panel2.Location = new Point(353, 112);
             panel2.Name = "panel2";
-            panel2.Size = new Size(691, 435);
+            panel2.Size = new Size(461, 290);
             panel2.TabIndex = 2;
             // 
             // lsvBill
             // 
             lsvBill.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             lsvBill.GridLines = true;
-            lsvBill.Location = new Point(-4, 4);
-            lsvBill.Margin = new Padding(4);
+            lsvBill.Location = new Point(-3, 3);
             lsvBill.Name = "lsvBill";
-            lsvBill.Size = new Size(695, 410);
+            lsvBill.Size = new Size(465, 275);
             lsvBill.TabIndex = 0;
             lsvBill.UseCompatibleStateImageBehavior = false;
             lsvBill.View = View.Details;
@@ -148,19 +148,19 @@
             panel3.Controls.Add(nmDiscount);
             panel3.Controls.Add(btnDiscount);
             panel3.Controls.Add(btnCheckout);
-            panel3.Location = new Point(530, 612);
-            panel3.Margin = new Padding(4);
+            panel3.Location = new Point(353, 408);
             panel3.Name = "panel3";
-            panel3.Size = new Size(691, 118);
+            panel3.Size = new Size(461, 79);
             panel3.TabIndex = 3;
             // 
             // txbTotalPrice
             // 
             txbTotalPrice.Font = new Font("Arial Narrow", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point);
-            txbTotalPrice.Location = new Point(323, 72);
+            txbTotalPrice.Location = new Point(229, 13);
+            txbTotalPrice.Margin = new Padding(2, 2, 2, 2);
             txbTotalPrice.Name = "txbTotalPrice";
             txbTotalPrice.ReadOnly = true;
-            txbTotalPrice.Size = new Size(175, 37);
+            txbTotalPrice.Size = new Size(129, 29);
             txbTotalPrice.TabIndex = 8;
             txbTotalPrice.Text = "0";
             txbTotalPrice.TextAlign = HorizontalAlignment.Center;
@@ -169,18 +169,16 @@
             // cbSwitchTable
             // 
             cbSwitchTable.FormattingEnabled = true;
-            cbSwitchTable.Location = new Point(9, 72);
-            cbSwitchTable.Margin = new Padding(4);
+            cbSwitchTable.Location = new Point(6, 48);
             cbSwitchTable.Name = "cbSwitchTable";
-            cbSwitchTable.Size = new Size(146, 38);
+            cbSwitchTable.Size = new Size(99, 28);
             cbSwitchTable.TabIndex = 7;
             // 
             // btnSwitchTable
             // 
-            btnSwitchTable.Location = new Point(9, 9);
-            btnSwitchTable.Margin = new Padding(4);
+            btnSwitchTable.Location = new Point(6, 6);
             btnSwitchTable.Name = "btnSwitchTable";
-            btnSwitchTable.Size = new Size(148, 52);
+            btnSwitchTable.Size = new Size(99, 35);
             btnSwitchTable.TabIndex = 6;
             btnSwitchTable.Text = "Switch Table";
             btnSwitchTable.UseVisualStyleBackColor = true;
@@ -188,29 +186,26 @@
             // 
             // nmDiscount
             // 
-            nmDiscount.Location = new Point(163, 73);
-            nmDiscount.Margin = new Padding(4);
+            nmDiscount.Location = new Point(229, 48);
             nmDiscount.Name = "nmDiscount";
-            nmDiscount.Size = new Size(141, 35);
+            nmDiscount.Size = new Size(128, 27);
             nmDiscount.TabIndex = 5;
             nmDiscount.TextAlign = HorizontalAlignment.Center;
             // 
             // btnDiscount
             // 
-            btnDiscount.Location = new Point(165, 10);
-            btnDiscount.Margin = new Padding(4);
+            btnDiscount.Location = new Point(110, 7);
             btnDiscount.Name = "btnDiscount";
-            btnDiscount.Size = new Size(141, 52);
+            btnDiscount.Size = new Size(94, 35);
             btnDiscount.TabIndex = 4;
             btnDiscount.Text = "Discount";
             btnDiscount.UseVisualStyleBackColor = true;
             // 
             // btnCheckout
             // 
-            btnCheckout.Location = new Point(545, 10);
-            btnCheckout.Margin = new Padding(4);
+            btnCheckout.Location = new Point(363, 7);
             btnCheckout.Name = "btnCheckout";
-            btnCheckout.Size = new Size(141, 105);
+            btnCheckout.Size = new Size(94, 70);
             btnCheckout.TabIndex = 3;
             btnCheckout.Text = "Check Out";
             btnCheckout.UseVisualStyleBackColor = true;
@@ -223,35 +218,34 @@
             panel4.Controls.Add(btnAddFood);
             panel4.Controls.Add(cbFood);
             panel4.Controls.Add(cbCategory);
-            panel4.Location = new Point(526, 46);
-            panel4.Margin = new Padding(4);
+            panel4.Location = new Point(351, 31);
             panel4.Name = "panel4";
-            panel4.Size = new Size(690, 112);
+            panel4.Size = new Size(460, 75);
             panel4.TabIndex = 4;
             // 
             // nmFoodCount
             // 
-            nmFoodCount.Location = new Point(475, 38);
+            nmFoodCount.Location = new Point(317, 25);
+            nmFoodCount.Margin = new Padding(2, 2, 2, 2);
             nmFoodCount.Name = "nmFoodCount";
-            nmFoodCount.Size = new Size(129, 35);
+            nmFoodCount.Size = new Size(86, 27);
             nmFoodCount.TabIndex = 4;
             // 
             // nbFoodCount
             // 
-            nbFoodCount.Location = new Point(1074, 86);
-            nbFoodCount.Margin = new Padding(9);
+            nbFoodCount.Location = new Point(716, 57);
+            nbFoodCount.Margin = new Padding(6, 6, 6, 6);
             nbFoodCount.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             nbFoodCount.Name = "nbFoodCount";
-            nbFoodCount.Size = new Size(141, 35);
+            nbFoodCount.Size = new Size(94, 27);
             nbFoodCount.TabIndex = 3;
             nbFoodCount.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // btnAddFood
             // 
-            btnAddFood.Location = new Point(327, 3);
-            btnAddFood.Margin = new Padding(4);
+            btnAddFood.Location = new Point(218, 2);
             btnAddFood.Name = "btnAddFood";
-            btnAddFood.Size = new Size(141, 105);
+            btnAddFood.Size = new Size(94, 70);
             btnAddFood.TabIndex = 2;
             btnAddFood.Text = "Add Food";
             btnAddFood.UseVisualStyleBackColor = true;
@@ -260,44 +254,63 @@
             // cbFood
             // 
             cbFood.FormattingEnabled = true;
-            cbFood.Location = new Point(4, 66);
-            cbFood.Margin = new Padding(4);
+            cbFood.Location = new Point(3, 44);
             cbFood.Name = "cbFood";
-            cbFood.Size = new Size(312, 38);
+            cbFood.Size = new Size(209, 28);
             cbFood.TabIndex = 1;
             cbFood.SelectedIndexChanged += cbFood_SelectedIndexChanged;
             // 
             // cbCategory
             // 
             cbCategory.FormattingEnabled = true;
-            cbCategory.Location = new Point(4, 4);
-            cbCategory.Margin = new Padding(4);
+            cbCategory.Location = new Point(3, 3);
             cbCategory.Name = "cbCategory";
-            cbCategory.Size = new Size(312, 38);
+            cbCategory.Size = new Size(209, 28);
             cbCategory.TabIndex = 0;
             cbCategory.SelectedIndexChanged += cbCategory_SelectedIndexChanged;
             // 
             // flpTable
             // 
             flpTable.AutoScroll = true;
-            flpTable.Location = new Point(18, 46);
-            flpTable.Margin = new Padding(4);
+            flpTable.Location = new Point(12, 31);
             flpTable.Name = "flpTable";
-            flpTable.Size = new Size(503, 684);
+            flpTable.Size = new Size(335, 456);
             flpTable.TabIndex = 5;
+            // 
+            // chứcNăngToolStripMenuItem
+            // 
+            chứcNăngToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { thanhToánToolStripMenuItem, thêmMónToolStripMenuItem });
+            chứcNăngToolStripMenuItem.Name = "chứcNăngToolStripMenuItem";
+            chứcNăngToolStripMenuItem.Size = new Size(93, 24);
+            chứcNăngToolStripMenuItem.Text = "Chức năng";
+            // 
+            // thanhToánToolStripMenuItem
+            // 
+            thanhToánToolStripMenuItem.Name = "thanhToánToolStripMenuItem";
+            thanhToánToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
+            thanhToánToolStripMenuItem.Size = new Size(224, 26);
+            thanhToánToolStripMenuItem.Text = "Thanh toán";
+            thanhToánToolStripMenuItem.Click += thanhToánToolStripMenuItem_Click;
+            // 
+            // thêmMónToolStripMenuItem
+            // 
+            thêmMónToolStripMenuItem.Name = "thêmMónToolStripMenuItem";
+            thêmMónToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.V;
+            thêmMónToolStripMenuItem.Size = new Size(224, 26);
+            thêmMónToolStripMenuItem.Text = "Thêm món";
+            thêmMónToolStripMenuItem.Click += thêmMónToolStripMenuItem_Click;
             // 
             // fTableManager
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1239, 748);
+            ClientSize = new Size(826, 499);
             Controls.Add(flpTable);
             Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(4);
             Name = "fTableManager";
             Text = "Management software";
             menuStrip1.ResumeLayout(false);
@@ -339,5 +352,8 @@
         private ColumnHeader columnHeader4;
         private TextBox txbTotalPrice;
         private NumericUpDown nmFoodCount;
+        private ToolStripMenuItem chứcNăngToolStripMenuItem;
+        private ToolStripMenuItem thanhToánToolStripMenuItem;
+        private ToolStripMenuItem thêmMónToolStripMenuItem;
     }
 }
