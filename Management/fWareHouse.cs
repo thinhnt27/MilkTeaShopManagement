@@ -294,7 +294,8 @@ namespace Management
 
         private void btnGetProductDetail_Click(object sender, EventArgs e)
         {
-
+            fProductManagement addProductForm = new fProductManagement();
+            addProductForm.Show(); // Show the AddProductForm
         }
 
         private void dgvProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -321,7 +322,11 @@ namespace Management
             LoadListProductByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, 1);
         }
 
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            fSupplierManagement supplierForm = new fSupplierManagement();
+            supplierForm.Show();
+        }
     }
 
 }

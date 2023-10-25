@@ -71,11 +71,17 @@ namespace Management.DAO
 
         public bool UpdateProduct(int id, string productCode, string productName, string category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note)
         {
-            string query = string.Format("UPDATE dbo.Product SET productCode = '{0}', productName = '{1}', category = '{2}', unitPrice = {3}, quantityInStock = {4}, quantitySold = {5}, dateStockReceived = '{6}', dateOutOfStock = '{7}', reOrderLevel = {8}, note = '{9}' WHERE id = {10}", productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived.ToString("yyyy-MM-dd HH:mm:ss"), dateOutOfStock?.ToString("yyyy-MM-dd HH:mm:ss"), reOrderLevel, note, id);
-            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            string query = "UPDATE dbo.Product SET productCode = @ProductCode, productName = @ProductName, category = @Category, unitPrice = @UnitPrice, quantityInStock = @QuantityInStock, quantitySold = @QuantitySold, dateStockReceived = @DateStockReceived, dateOutOfStock = @DateOutOfStock, reOrderLevel = @ReOrderLevel, note = @Note WHERE id = @ID";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, id });
             return result > 0;
         }
 
+        public bool UpdateProduct1(int productId, string productCode, string productName, string category, double unitPrice, int quantityInStock, string note)
+        {
+            string query = "UPDATE dbo.Product SET productCode = @ProductCode, productName = @ProductName, category = @Category, unitPrice = @UnitPrice, quantityInStock = @QuantityInStock, note = @Note WHERE id = @ID";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { productCode, productName, category, unitPrice, quantityInStock, note, productId });
+            return result > 0;
+        }
         public bool DeleteProduct(int id)
         {
             string query = string.Format("DELETE FROM dbo.Product WHERE id = {0}", id);
@@ -116,6 +122,19 @@ namespace Management.DAO
             string query = "SELECT * FROM Product WHERE productCode = @productCode";
             return DataProvider.Instance.ExecuteQuery(query, new object[] { productCode });
         }
+
+        public DataTable SortById()
+        {
+            string query = "SELECT * FROM Product ORDER BY id";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
+
+        public DataTable SortByIdDesc()
+        {
+            string query = "SELECT * FROM Product ORDER BY id DESC";
+            return DataProvider.Instance.ExecuteQuery(query);
+        }
+
         public DataTable SortByQuantitySold()
         {
             string query = "SELECT * FROM Product ORDER BY quantitySold";

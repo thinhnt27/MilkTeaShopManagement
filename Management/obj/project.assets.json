@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "Dapper/2.1.15": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/3.1.0": {
         "type": "package",
         "compile": {
@@ -150,6 +163,25 @@
     }
   },
   "libraries": {
+    "Dapper/2.1.15": {
+      "sha512": "1aWSAosZymEM+mRwfrXteRIN74/JTUjqj9B/KqEbanH6vfUKy9D9cemRN0q1ZOEfSB7d1PpFTpVOCbf2Uv70Og==",
+      "type": "package",
+      "path": "dapper/2.1.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.1.15.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net5.0/Dapper.dll",
+        "lib/net5.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml",
+        "readme.md"
+      ]
+    },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "sha512": "z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
       "type": "package",
@@ -466,23 +498,29 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "Dapper >= 2.1.15",
       "System.Data.SqlClient >= 4.8.5"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sontv\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN-PC\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sontv\\Documents\\Desktop\\CCC\\GIT\\MilkTeaShopManagement\\Management\\Management.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN-PC\\Desktop\\MilkTeaShopManagement\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj",
       "projectName": "Management",
-      "projectPath": "C:\\Users\\sontv\\Documents\\Desktop\\CCC\\GIT\\MilkTeaShopManagement\\Management\\Management.csproj",
-      "packagesPath": "C:\\Users\\sontv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sontv\\Documents\\Desktop\\CCC\\GIT\\MilkTeaShopManagement\\Management\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN-PC\\Desktop\\MilkTeaShopManagement\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\Management.csproj",
+      "packagesPath": "C:\\Users\\ADMIN-PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ADMIN-PC\\Desktop\\MilkTeaShopManagement\\MilkTeaShopManagement\\MilkTeaShopManagement\\Management\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\sontv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -508,6 +546,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "Dapper": {
+            "target": "Package",
+            "version": "[2.1.15, )"
+          },
           "System.Data.SqlClient": {
             "target": "Package",
             "version": "[4.8.5, )"

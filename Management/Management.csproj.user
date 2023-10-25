@@ -10,10 +10,13 @@
     <Compile Update="fLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form1.cs">
+    <Compile Update="fProductManagement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="fProductDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fSupplierManagement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="fTableManager.cs">
