@@ -294,7 +294,8 @@ namespace Management
 
         private void btnGetProductDetail_Click(object sender, EventArgs e)
         {
-
+            //fProductDetail f = new fProductDetail();
+            //f.ShowDialog;
         }
 
         private void dgvProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

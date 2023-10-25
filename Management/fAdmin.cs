@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Management
 {
@@ -17,6 +18,7 @@ namespace Management
     {
         BindingSource foodList = new BindingSource();
         BindingSource accountList = new BindingSource();
+        BindingSource tableList = new BindingSource();
         public Account loginAccount;
 
         public fAdmin()
@@ -34,9 +36,11 @@ namespace Management
             LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
             LoadListFood();
             LoadAccount();
+            LoadTable();
             LoadCategoryIntoCombobox(cbFoodCategory);
             AddFoodBinding();
             AddAccountBinding();
+            AddTableBinding();
         }
 
         void AddAccountBinding()
@@ -45,16 +49,22 @@ namespace Management
             txbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "FullName", true, DataSourceUpdateMode.Never));
             nudType.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
         }
+        void LoadTable()
+        {
+            tableList.DataSource = TableDAO.Instance.LoadTableList();
+            dtgvTable.DataSource = tableList;
+        }
+        void AddTableBinding()
+        {
+            txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbTableStatus.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
+        }
         void LoadAccount()
         {
             accountList.DataSource = AccountDAO.Instance.GetListAccount();
         }
         private void tpFood_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tcAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -337,8 +347,81 @@ namespace Management
             txbPageBill.Text = page.ToString();
         }
 
-    
-       private event EventHandler insertFood;
+        private void wareHouseDialog(object sender, EventArgs e)
+        {
+            fWareHouse f = new fWareHouse();
+            f.ShowDialog();
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void btnAddTable_Click(object sender, EventArgs e)
+        {
+            string name = txbTableName.Text;
+            List<Table> listTable = TableDAO.Instance.LoadTableList();
+            var tableExisting= listTable.FirstOrDefault(x=> x.Name.Equals(name));
+            if(tableExisting != null)
+            {
+                MessageBox.Show("Bàn đã tồn tại","Trạng thái",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            
+            
+            if (TableDAO.Instance.InsertTable(name))
+            {
+                MessageBox.Show("Thêm bàn thành công", "Trạng thái", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadTable();
+            }
+            else
+            {
+                MessageBox.Show("Thêm bàn không thành công", "Trạng thái", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void btnDeleteTable_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txbTableID.Text);
+
+            List<Table> listTable = TableDAO.Instance.LoadTableList();
+            var tableExisting = listTable.FirstOrDefault(x=>x.ID==id);
+            if(tableExisting != null) {
+
+                var result = TableDAO.Instance.DeleteTable(id);
+                if (result)
+                {
+                    MessageBox.Show("Xóa bàn thành công","Trạng thái",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    LoadTable();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa bàn không thành công", "Trạng thái", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+
+            }
+            else
+            {
+                
+            }
+
+        }
+
+        private void btnEditTable_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnShowTable_Click(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
+        private event EventHandler insertFood;
         public event EventHandler InsertFood
         {
             add

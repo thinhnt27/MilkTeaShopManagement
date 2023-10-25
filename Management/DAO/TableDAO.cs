@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Management.DAO
 {
@@ -36,5 +37,22 @@ namespace Management.DAO
             }
             return tableList;
         }
+
+        public bool InsertTable(string name)
+        {
+           
+            string query = string.Format("INSERT dbo.TableFood (name,status) VALUES (N'{0}',N'{1}')", name, "Trống");
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            return result > 0;
+
+        }
+
+        public bool DeleteTable(int id) {
+            string query = string.Format("Delete TableFood where id ={0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
     }
 }

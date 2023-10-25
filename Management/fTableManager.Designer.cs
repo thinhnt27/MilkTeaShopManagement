@@ -33,6 +33,10 @@
             infomationAccountToolStripMenuItem = new ToolStripMenuItem();
             personalInformationToolStripMenuItem = new ToolStripMenuItem();
             logoutToolStripMenuItem = new ToolStripMenuItem();
+            chứcNăngToolStripMenuItem = new ToolStripMenuItem();
+            thanhToánToolStripMenuItem = new ToolStripMenuItem();
+            thêmMónToolStripMenuItem = new ToolStripMenuItem();
+            wareHouseToolStripMenuItem = new ToolStripMenuItem();
             panel2 = new Panel();
             lsvBill = new ListView();
             columnHeader1 = new ColumnHeader();
@@ -53,9 +57,6 @@
             cbFood = new ComboBox();
             cbCategory = new ComboBox();
             flpTable = new FlowLayoutPanel();
-            chứcNăngToolStripMenuItem = new ToolStripMenuItem();
-            thanhToánToolStripMenuItem = new ToolStripMenuItem();
-            thêmMónToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -68,7 +69,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { adminToolStripMenuItem, infomationAccountToolStripMenuItem, chứcNăngToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { adminToolStripMenuItem, infomationAccountToolStripMenuItem, chứcNăngToolStripMenuItem, wareHouseToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(826, 28);
@@ -103,6 +104,36 @@
             logoutToolStripMenuItem.Size = new Size(229, 26);
             logoutToolStripMenuItem.Text = "Logout";
             logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
+            // 
+            // chứcNăngToolStripMenuItem
+            // 
+            chứcNăngToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { thanhToánToolStripMenuItem, thêmMónToolStripMenuItem });
+            chứcNăngToolStripMenuItem.Name = "chứcNăngToolStripMenuItem";
+            chứcNăngToolStripMenuItem.Size = new Size(93, 24);
+            chứcNăngToolStripMenuItem.Text = "Chức năng";
+            // 
+            // thanhToánToolStripMenuItem
+            // 
+            thanhToánToolStripMenuItem.Name = "thanhToánToolStripMenuItem";
+            thanhToánToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
+            thanhToánToolStripMenuItem.Size = new Size(217, 26);
+            thanhToánToolStripMenuItem.Text = "Thanh toán";
+            thanhToánToolStripMenuItem.Click += thanhToánToolStripMenuItem_Click;
+            // 
+            // thêmMónToolStripMenuItem
+            // 
+            thêmMónToolStripMenuItem.Name = "thêmMónToolStripMenuItem";
+            thêmMónToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.V;
+            thêmMónToolStripMenuItem.Size = new Size(217, 26);
+            thêmMónToolStripMenuItem.Text = "Thêm món";
+            thêmMónToolStripMenuItem.Click += thêmMónToolStripMenuItem_Click;
+            // 
+            // wareHouseToolStripMenuItem
+            // 
+            wareHouseToolStripMenuItem.Name = "wareHouseToolStripMenuItem";
+            wareHouseToolStripMenuItem.Size = new Size(49, 24);
+            wareHouseToolStripMenuItem.Text = "Kho";
+            wareHouseToolStripMenuItem.Click += wareHouseToolStripMenuItem_Click;
             // 
             // panel2
             // 
@@ -157,7 +188,7 @@
             // 
             txbTotalPrice.Font = new Font("Arial Narrow", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point);
             txbTotalPrice.Location = new Point(229, 13);
-            txbTotalPrice.Margin = new Padding(2, 2, 2, 2);
+            txbTotalPrice.Margin = new Padding(2);
             txbTotalPrice.Name = "txbTotalPrice";
             txbTotalPrice.ReadOnly = true;
             txbTotalPrice.Size = new Size(129, 29);
@@ -226,7 +257,7 @@
             // nmFoodCount
             // 
             nmFoodCount.Location = new Point(317, 25);
-            nmFoodCount.Margin = new Padding(2, 2, 2, 2);
+            nmFoodCount.Margin = new Padding(2);
             nmFoodCount.Name = "nmFoodCount";
             nmFoodCount.Size = new Size(86, 27);
             nmFoodCount.TabIndex = 4;
@@ -234,7 +265,7 @@
             // nbFoodCount
             // 
             nbFoodCount.Location = new Point(716, 57);
-            nbFoodCount.Margin = new Padding(6, 6, 6, 6);
+            nbFoodCount.Margin = new Padding(6);
             nbFoodCount.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             nbFoodCount.Name = "nbFoodCount";
             nbFoodCount.Size = new Size(94, 27);
@@ -276,29 +307,6 @@
             flpTable.Name = "flpTable";
             flpTable.Size = new Size(335, 456);
             flpTable.TabIndex = 5;
-            // 
-            // chứcNăngToolStripMenuItem
-            // 
-            chứcNăngToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { thanhToánToolStripMenuItem, thêmMónToolStripMenuItem });
-            chứcNăngToolStripMenuItem.Name = "chứcNăngToolStripMenuItem";
-            chứcNăngToolStripMenuItem.Size = new Size(93, 24);
-            chứcNăngToolStripMenuItem.Text = "Chức năng";
-            // 
-            // thanhToánToolStripMenuItem
-            // 
-            thanhToánToolStripMenuItem.Name = "thanhToánToolStripMenuItem";
-            thanhToánToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
-            thanhToánToolStripMenuItem.Size = new Size(224, 26);
-            thanhToánToolStripMenuItem.Text = "Thanh toán";
-            thanhToánToolStripMenuItem.Click += thanhToánToolStripMenuItem_Click;
-            // 
-            // thêmMónToolStripMenuItem
-            // 
-            thêmMónToolStripMenuItem.Name = "thêmMónToolStripMenuItem";
-            thêmMónToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.V;
-            thêmMónToolStripMenuItem.Size = new Size(224, 26);
-            thêmMónToolStripMenuItem.Text = "Thêm món";
-            thêmMónToolStripMenuItem.Click += thêmMónToolStripMenuItem_Click;
             // 
             // fTableManager
             // 
@@ -355,5 +363,6 @@
         private ToolStripMenuItem chứcNăngToolStripMenuItem;
         private ToolStripMenuItem thanhToánToolStripMenuItem;
         private ToolStripMenuItem thêmMónToolStripMenuItem;
+        private ToolStripMenuItem wareHouseToolStripMenuItem;
     }
 }

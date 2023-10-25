@@ -42,6 +42,7 @@ namespace Management
         void ChangeAccount(int type)
         {
             adminToolStripMenuItem.Enabled = type == 1;
+            wareHouseToolStripMenuItem.Enabled = type == 1;
             infomationAccountToolStripMenuItem.Text += " (" + LoginAccount.DisplayName + ")";
         }
         void LoadCategory()
@@ -118,7 +119,7 @@ namespace Management
         #region Events
         private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnCheckout_Click(this,new EventArgs());
+            btnCheckout_Click(this, new EventArgs());
         }
 
         private void thêmMónToolStripMenuItem_Click(object sender, EventArgs e)
@@ -280,7 +281,13 @@ namespace Management
 
         #endregion
 
-        
+
+        private void wareHouseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            fWareHouse f = new fWareHouse();
+            f.ShowDialog();
+        }
     }
 
 }

@@ -65,33 +65,17 @@
             btnAddFood = new Button();
             panel3 = new Panel();
             dtgvFood = new DataGridView();
-            tpFoodCategory = new TabPage();
-            panel18 = new Panel();
-            dtgvCategory = new DataGridView();
-            panel13 = new Panel();
-            panel16 = new Panel();
-            textBox2 = new TextBox();
-            label7 = new Label();
-            panel17 = new Panel();
-            txbCategoryID = new TextBox();
-            label8 = new Label();
-            panel11 = new Panel();
-            btnShowCategory = new Button();
-            btnEditCategory = new Button();
-            btnDeleteCategory = new Button();
-            btnAddCategory = new Button();
             tpTable = new TabPage();
             panel12 = new Panel();
             dtgvTable = new DataGridView();
             panel14 = new Panel();
             panel21 = new Panel();
-            cbTableStatus = new ComboBox();
             label9 = new Label();
             panel15 = new Panel();
             txbTableName = new TextBox();
             label5 = new Label();
             panel19 = new Panel();
-            textBox3 = new TextBox();
+            txbTableID = new TextBox();
             label6 = new Label();
             panel20 = new Panel();
             btnShowTable = new Button();
@@ -118,7 +102,7 @@
             btnDeleteAccount = new Button();
             btnAddAccount = new Button();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            txbTableStatus = new TextBox();
             tcAdmin.SuspendLayout();
             tpBill.SuspendLayout();
             panel2.SuspendLayout();
@@ -135,13 +119,6 @@
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvFood).BeginInit();
-            tpFoodCategory.SuspendLayout();
-            panel18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dtgvCategory).BeginInit();
-            panel13.SuspendLayout();
-            panel16.SuspendLayout();
-            panel17.SuspendLayout();
-            panel11.SuspendLayout();
             tpTable.SuspendLayout();
             panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvTable).BeginInit();
@@ -165,17 +142,14 @@
             // 
             tcAdmin.Controls.Add(tpBill);
             tcAdmin.Controls.Add(tpFood);
-            tcAdmin.Controls.Add(tpFoodCategory);
             tcAdmin.Controls.Add(tpTable);
             tcAdmin.Controls.Add(tpAcount);
             tcAdmin.Controls.Add(tabPage1);
-            tcAdmin.Controls.Add(tabPage2);
             tcAdmin.Location = new Point(12, 12);
             tcAdmin.Name = "tcAdmin";
             tcAdmin.SelectedIndex = 0;
-            tcAdmin.Size = new Size(766, 501);
+            tcAdmin.Size = new Size(776, 501);
             tcAdmin.TabIndex = 0;
-            tcAdmin.SelectedIndexChanged += tcAdmin_SelectedIndexChanged;
             // 
             // tpBill
             // 
@@ -184,7 +158,7 @@
             tpBill.Location = new Point(4, 29);
             tpBill.Name = "tpBill";
             tpBill.Padding = new Padding(3);
-            tpBill.Size = new Size(758, 468);
+            tpBill.Size = new Size(768, 468);
             tpBill.TabIndex = 0;
             tpBill.Text = "Doanh thu";
             tpBill.UseVisualStyleBackColor = true;
@@ -263,7 +237,6 @@
             dtgvBill.RowTemplate.Height = 29;
             dtgvBill.Size = new Size(740, 368);
             dtgvBill.TabIndex = 0;
-         
             // 
             // panel1
             // 
@@ -308,7 +281,7 @@
             tpFood.Location = new Point(4, 29);
             tpFood.Name = "tpFood";
             tpFood.Padding = new Padding(3);
-            tpFood.Size = new Size(758, 468);
+            tpFood.Size = new Size(768, 468);
             tpFood.TabIndex = 1;
             tpFood.Text = "Món Ăn";
             tpFood.UseVisualStyleBackColor = true;
@@ -528,146 +501,6 @@
             dtgvFood.Size = new Size(405, 365);
             dtgvFood.TabIndex = 0;
             // 
-            // tpFoodCategory
-            // 
-            tpFoodCategory.Controls.Add(panel18);
-            tpFoodCategory.Controls.Add(panel13);
-            tpFoodCategory.Controls.Add(panel11);
-            tpFoodCategory.Location = new Point(4, 29);
-            tpFoodCategory.Name = "tpFoodCategory";
-            tpFoodCategory.Padding = new Padding(3);
-            tpFoodCategory.Size = new Size(758, 468);
-            tpFoodCategory.TabIndex = 2;
-            tpFoodCategory.Text = "Danh mục";
-            tpFoodCategory.UseVisualStyleBackColor = true;
-            // 
-            // panel18
-            // 
-            panel18.Controls.Add(dtgvCategory);
-            panel18.Location = new Point(6, 79);
-            panel18.Name = "panel18";
-            panel18.Size = new Size(411, 383);
-            panel18.TabIndex = 6;
-            // 
-            // dtgvCategory
-            // 
-            dtgvCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvCategory.Location = new Point(3, 3);
-            dtgvCategory.Name = "dtgvCategory";
-            dtgvCategory.RowHeadersWidth = 51;
-            dtgvCategory.RowTemplate.Height = 29;
-            dtgvCategory.Size = new Size(405, 365);
-            dtgvCategory.TabIndex = 0;
-            // 
-            // panel13
-            // 
-            panel13.Controls.Add(panel16);
-            panel13.Controls.Add(panel17);
-            panel13.Location = new Point(423, 79);
-            panel13.Name = "panel13";
-            panel13.Size = new Size(329, 383);
-            panel13.TabIndex = 4;
-            // 
-            // panel16
-            // 
-            panel16.Controls.Add(textBox2);
-            panel16.Controls.Add(label7);
-            panel16.Location = new Point(3, 65);
-            panel16.Name = "panel16";
-            panel16.Size = new Size(323, 56);
-            panel16.TabIndex = 4;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(154, 10);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(166, 27);
-            textBox2.TabIndex = 1;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(3, 10);
-            label7.Name = "label7";
-            label7.Size = new Size(152, 24);
-            label7.TabIndex = 0;
-            label7.Text = "Tên danh mục:";
-            // 
-            // panel17
-            // 
-            panel17.Controls.Add(txbCategoryID);
-            panel17.Controls.Add(label8);
-            panel17.Location = new Point(3, 3);
-            panel17.Name = "panel17";
-            panel17.Size = new Size(323, 56);
-            panel17.TabIndex = 3;
-            // 
-            // txbCategoryID
-            // 
-            txbCategoryID.Location = new Point(154, 10);
-            txbCategoryID.Name = "txbCategoryID";
-            txbCategoryID.ReadOnly = true;
-            txbCategoryID.Size = new Size(166, 27);
-            txbCategoryID.TabIndex = 1;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(3, 10);
-            label8.Name = "label8";
-            label8.Size = new Size(36, 24);
-            label8.TabIndex = 0;
-            label8.Text = "ID:";
-            // 
-            // panel11
-            // 
-            panel11.Controls.Add(btnShowCategory);
-            panel11.Controls.Add(btnEditCategory);
-            panel11.Controls.Add(btnDeleteCategory);
-            panel11.Controls.Add(btnAddCategory);
-            panel11.Location = new Point(6, 6);
-            panel11.Name = "panel11";
-            panel11.Size = new Size(411, 67);
-            panel11.TabIndex = 2;
-            // 
-            // btnShowCategory
-            // 
-            btnShowCategory.Location = new Point(306, 5);
-            btnShowCategory.Name = "btnShowCategory";
-            btnShowCategory.Size = new Size(92, 59);
-            btnShowCategory.TabIndex = 3;
-            btnShowCategory.Text = "Xem";
-            btnShowCategory.UseVisualStyleBackColor = true;
-            // 
-            // btnEditCategory
-            // 
-            btnEditCategory.Location = new Point(205, 3);
-            btnEditCategory.Name = "btnEditCategory";
-            btnEditCategory.Size = new Size(95, 59);
-            btnEditCategory.TabIndex = 2;
-            btnEditCategory.Text = "Sửa";
-            btnEditCategory.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteCategory
-            // 
-            btnDeleteCategory.Location = new Point(104, 3);
-            btnDeleteCategory.Name = "btnDeleteCategory";
-            btnDeleteCategory.Size = new Size(95, 59);
-            btnDeleteCategory.TabIndex = 1;
-            btnDeleteCategory.Text = "Xóa";
-            btnDeleteCategory.UseVisualStyleBackColor = true;
-            // 
-            // btnAddCategory
-            // 
-            btnAddCategory.Location = new Point(3, 3);
-            btnAddCategory.Name = "btnAddCategory";
-            btnAddCategory.Size = new Size(95, 59);
-            btnAddCategory.TabIndex = 0;
-            btnAddCategory.Text = "Thêm";
-            btnAddCategory.UseVisualStyleBackColor = true;
-            // 
             // tpTable
             // 
             tpTable.Controls.Add(panel12);
@@ -676,7 +509,7 @@
             tpTable.Location = new Point(4, 29);
             tpTable.Name = "tpTable";
             tpTable.Padding = new Padding(3);
-            tpTable.Size = new Size(758, 468);
+            tpTable.Size = new Size(768, 468);
             tpTable.TabIndex = 3;
             tpTable.Text = "Bàn ăn";
             tpTable.UseVisualStyleBackColor = true;
@@ -711,20 +544,12 @@
             // 
             // panel21
             // 
-            panel21.Controls.Add(cbTableStatus);
+            panel21.Controls.Add(txbTableStatus);
             panel21.Controls.Add(label9);
             panel21.Location = new Point(3, 127);
             panel21.Name = "panel21";
             panel21.Size = new Size(323, 56);
             panel21.TabIndex = 5;
-            // 
-            // cbTableStatus
-            // 
-            cbTableStatus.FormattingEnabled = true;
-            cbTableStatus.Location = new Point(154, 10);
-            cbTableStatus.Name = "cbTableStatus";
-            cbTableStatus.Size = new Size(166, 28);
-            cbTableStatus.TabIndex = 1;
             // 
             // label9
             // 
@@ -764,20 +589,20 @@
             // 
             // panel19
             // 
-            panel19.Controls.Add(textBox3);
+            panel19.Controls.Add(txbTableID);
             panel19.Controls.Add(label6);
             panel19.Location = new Point(3, 3);
             panel19.Name = "panel19";
             panel19.Size = new Size(323, 56);
             panel19.TabIndex = 3;
             // 
-            // textBox3
+            // txbTableID
             // 
-            textBox3.Location = new Point(154, 10);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(166, 27);
-            textBox3.TabIndex = 1;
+            txbTableID.Location = new Point(154, 10);
+            txbTableID.Name = "txbTableID";
+            txbTableID.ReadOnly = true;
+            txbTableID.Size = new Size(166, 27);
+            txbTableID.TabIndex = 1;
             // 
             // label6
             // 
@@ -808,6 +633,7 @@
             btnShowTable.TabIndex = 3;
             btnShowTable.Text = "Xem";
             btnShowTable.UseVisualStyleBackColor = true;
+            btnShowTable.Click += btnShowTable_Click;
             // 
             // btnEditTable
             // 
@@ -817,6 +643,7 @@
             btnEditTable.TabIndex = 2;
             btnEditTable.Text = "Sửa";
             btnEditTable.UseVisualStyleBackColor = true;
+            btnEditTable.Click += btnEditTable_Click;
             // 
             // btnDeleteTable
             // 
@@ -826,6 +653,7 @@
             btnDeleteTable.TabIndex = 1;
             btnDeleteTable.Text = "Xóa";
             btnDeleteTable.UseVisualStyleBackColor = true;
+            btnDeleteTable.Click += btnDeleteTable_Click;
             // 
             // btnAddTable
             // 
@@ -835,6 +663,7 @@
             btnAddTable.TabIndex = 0;
             btnAddTable.Text = "Thêm";
             btnAddTable.UseVisualStyleBackColor = true;
+            btnAddTable.Click += btnAddTable_Click;
             // 
             // tpAcount
             // 
@@ -844,7 +673,7 @@
             tpAcount.Location = new Point(4, 29);
             tpAcount.Name = "tpAcount";
             tpAcount.Padding = new Padding(3);
-            tpAcount.Size = new Size(758, 468);
+            tpAcount.Size = new Size(768, 468);
             tpAcount.TabIndex = 4;
             tpAcount.Text = "Tài khoản";
             tpAcount.UseVisualStyleBackColor = true;
@@ -1023,20 +852,18 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(758, 468);
+            tabPage1.Size = new Size(768, 468);
             tabPage1.TabIndex = 5;
             tabPage1.Text = "   Kho";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // txbTableStatus
             // 
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(758, 468);
-            tabPage2.TabIndex = 6;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            txbTableStatus.Location = new Point(154, 10);
+            txbTableStatus.Name = "txbTableStatus";
+            txbTableStatus.ReadOnly = true;
+            txbTableStatus.Size = new Size(166, 27);
+            txbTableStatus.TabIndex = 2;
             // 
             // fAdmin
             // 
@@ -1068,15 +895,6 @@
             panel4.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtgvFood).EndInit();
-            tpFoodCategory.ResumeLayout(false);
-            panel18.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dtgvCategory).EndInit();
-            panel13.ResumeLayout(false);
-            panel16.ResumeLayout(false);
-            panel16.PerformLayout();
-            panel17.ResumeLayout(false);
-            panel17.PerformLayout();
-            panel11.ResumeLayout(false);
             tpTable.ResumeLayout(false);
             panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtgvTable).EndInit();
@@ -1108,7 +926,6 @@
         private TabControl tcAdmin;
         private TabPage tpBill;
         private TabPage tpFood;
-        private TabPage tpFoodCategory;
         private TabPage tpTable;
         private TabPage tpAcount;
         private Panel panel2;
@@ -1140,20 +957,6 @@
         private ComboBox cbFoodCategory;
         private Label label4;
         private NumericUpDown nmFoodPrice;
-        private Panel panel18;
-        private DataGridView dtgvCategory;
-        private Panel panel13;
-        private Panel panel16;
-        private TextBox textBox2;
-        private Label label7;
-        private Panel panel17;
-        private TextBox txbCategoryID;
-        private Label label8;
-        private Panel panel11;
-        private Button btnShowCategory;
-        private Button btnEditCategory;
-        private Button btnDeleteCategory;
-        private Button btnAddCategory;
         private Panel panel12;
         private DataGridView dtgvTable;
         private Panel panel14;
@@ -1161,10 +964,9 @@
         private Label label9;
         private Panel panel15;
         private TextBox txbTableName;
-        private TextBox textBox1;
         private Label label5;
         private Panel panel19;
-        private TextBox textBox3;
+        private TextBox txbTableID;
         private Label label6;
         private Panel panel20;
         private Button btnShowTable;
@@ -1174,7 +976,6 @@
         private Button button2;
         private Button button3;
         private Button btnAddTable;
-        private ComboBox cbTableStatus;
         private Panel panel22;
         private DataGridView dtgvAccount;
         private Panel panel23;
@@ -1199,6 +1000,6 @@
         private Button btnLastBillPage;
         private Button btnFirstBillPage;
         private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TextBox txbTableStatus;
     }
 }
