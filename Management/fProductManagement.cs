@@ -18,6 +18,15 @@ namespace Management
         public fProductManagement()
         {
             InitializeComponent();
+            var supllierList = SupplierDAO.Instance.GetListSupplier();
+            cmbSupplier.DataSource = supllierList;
+            cmbSupplier.DisplayMember = "Name"; 
+            cmbSupplier.ValueMember = "Id";
+            var catorList = CategoryDAO.Instance.GetListCategory();
+            cmbCategory.DataSource = catorList;
+            cmbCategory.DisplayMember = "Name";
+            cmbCategory.ValueMember = "ID";
+            cmbCategory.SelectedIndex = 0;
             Load();
         }
         private void Load()
@@ -45,35 +54,7 @@ namespace Management
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Get input values from the form
-                int productId = Convert.ToInt32(txtId.Text);
-                string productCode = txtProductCode.Text;
-                string productName = txtProductName.Text;
-                string category = cmbCategory.Text;
-                double unitPrice = Convert.ToDouble(txtUnitPrice.Text);
-                int quantityInStock = Convert.ToInt32(txtQuantityInStock.Text);
-                string note = txtNote.Text;
-
-                // Update the product in the database
-                bool result = ProductDAO.Instance.UpdateProduct1(productId, productCode, productName, category, unitPrice, quantityInStock, note);
-
-                if (result)
-                {
-                    MessageBox.Show("Product updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ProductUpdated?.Invoke(this, EventArgs.Empty);
-                    Load();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update the product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+           
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -82,17 +63,19 @@ namespace Management
                 // Get input values from the form
                 string productCode = txtProductCode.Text;
                 string productName = txtProductName.Text;
-                string category = cmbCategory.Text;
+                int category =Convert.ToInt32(cmbCategory.SelectedValue);
                 double unitPrice = Convert.ToDouble(txtUnitPrice.Text);
-                int quantityInStock = Convert.ToInt32(txtQuantityInStock.Text);
+                int quantityInStock = 0;
                 int quantitySold = 0;
                 DateTime dateStockReceived = DateTime.Now;
                 DateTime? dateOutOfStock = null;
                 int reOrderLevel = 0;
                 string note = txtNote.Text;
+               int supplierId = Convert.ToInt32(cmbSupplier.Text);
+
 
                 // Insert the product into the database
-                bool result = ProductDAO.Instance.InsertProduct(productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note);
+                bool result = ProductDAO.Instance.InsertProduct(productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplierId);
 
                 if (result)
                 {

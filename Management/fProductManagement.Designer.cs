@@ -32,8 +32,8 @@
             txtId = new TextBox();
             label1 = new Label();
             panel7 = new Panel();
+            cmbSupplier = new ComboBox();
             label12 = new Label();
-            txtQuantityInStock = new TextBox();
             label7 = new Label();
             panel6 = new Panel();
             txtNote = new TextBox();
@@ -96,8 +96,8 @@
             // 
             // panel7
             // 
+            panel7.Controls.Add(cmbSupplier);
             panel7.Controls.Add(label12);
-            panel7.Controls.Add(txtQuantityInStock);
             panel7.Controls.Add(label7);
             panel7.Location = new Point(24, 340);
             panel7.Name = "panel7";
@@ -105,22 +105,23 @@
             panel7.TabIndex = 24;
             panel7.Paint += panel7_Paint;
             // 
+            // cmbSupplier
+            // 
+            cmbSupplier.FormattingEnabled = true;
+            cmbSupplier.Location = new Point(248, 17);
+            cmbSupplier.Name = "cmbSupplier";
+            cmbSupplier.Size = new Size(211, 28);
+            cmbSupplier.TabIndex = 4;
+            // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(451, 19);
+            label12.Location = new Point(102, 19);
             label12.Name = "label12";
-            label12.Size = new Size(65, 24);
-            label12.TabIndex = 20;
-            label12.Text = "/Hàng";
-            // 
-            // txtQuantityInStock
-            // 
-            txtQuantityInStock.Location = new Point(266, 16);
-            txtQuantityInStock.Name = "txtQuantityInStock";
-            txtQuantityInStock.Size = new Size(179, 27);
-            txtQuantityInStock.TabIndex = 1;
+            label12.Size = new Size(140, 24);
+            label12.TabIndex = 3;
+            label12.Text = "Nhà cung cấp";
             // 
             // label7
             // 
@@ -383,8 +384,6 @@
         private TextBox txtId;
         private Label label1;
         private Panel panel7;
-        private Label label12;
-        private TextBox txtQuantityInStock;
         private Label label7;
         private Panel panel6;
         private TextBox txtNote;
@@ -408,5 +407,7 @@
         private Label label8;
         private ComboBox comboBox1;
         private Label label9;
+        private ComboBox cmbSupplier;
+        private Label label12;
     }
 }

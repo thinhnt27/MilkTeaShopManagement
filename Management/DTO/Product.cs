@@ -9,7 +9,7 @@ namespace Management.DTO
 {
     public class Product
     {
-        public Product(int id, string productCode, string productName, string category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note)
+        public Product(int id, string productCode, string productName, int category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note, int supplierId)
         {
             this.Id = id;
             this.ProductCode = productCode;
@@ -22,6 +22,7 @@ namespace Management.DTO
             this.DateOutOfStock = dateOutOfStock;
             this.ReOrderLevel = reOrderLevel;
             this.Note = note;
+            this.supplierId = supplierId;
         }
 
         public Product(DataRow row)
@@ -29,7 +30,7 @@ namespace Management.DTO
             this.Id = Convert.ToInt32(row["id"]);
             this.ProductCode = row["productCode"].ToString();
             this.ProductName = row["productName"].ToString();
-            this.Category = row["category"].ToString();
+            this.Category = Convert.ToInt32(row["categoryId"]);
             this.UnitPrice = Convert.ToDouble(row["unitPrice"]);
             this.QuantityInStock = Convert.ToInt32(row["quantityInStock"]);
             this.QuantitySold = Convert.ToInt32(row["quantitySold"]);
@@ -46,12 +47,13 @@ namespace Management.DTO
             {
                 this.Note = row["note"].ToString();
             }
+            this.supplierId = Convert.ToInt32(row["supplierId"]);
         }
 
         public int Id { get; set; }
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
-        public string Category { get; set; }
+        public int Category { get; set; }
         public double UnitPrice { get; set; }
         public int QuantityInStock { get; set; }
         public int QuantitySold { get; set; }
@@ -59,6 +61,8 @@ namespace Management.DTO
         public DateTime? DateOutOfStock { get; set; }
         public int? ReOrderLevel { get; set; }
         public string Note { get; set; }
+
+        public int supplierId { get; set; }
     }
 
 }

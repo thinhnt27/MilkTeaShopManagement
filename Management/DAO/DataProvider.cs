@@ -18,7 +18,7 @@ namespace Management.DAO
             get {  if (instance == null) instance = new DataProvider(); return DataProvider.instance; } 
             private set => instance = value; 
         }
-        private string connectionStr = "Data Source=BAOBEO\\SQLEXPRESS;Initial Catalog=QuanLiCafe;User ID=sa;Password=12345;";
+        private string connectionStr = "Data Source=MSI\\SONBUIPE;Initial Catalog=QuanLiCafe;User ID=sa;Password=12345;";
 
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
@@ -113,5 +113,7 @@ namespace Management.DAO
 
             return data;
         }
+
+       
     }
 }

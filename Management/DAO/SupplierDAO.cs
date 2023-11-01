@@ -40,6 +40,7 @@ namespace Management.DAO
             return list;
         }
 
+
         public Supplier GetSupplierById(int id)
         {
             string query = string.Format("SELECT * FROM Supplier WHERE id = {0}", id);

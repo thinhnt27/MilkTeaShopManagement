@@ -61,27 +61,23 @@ namespace Management.DAO
             return list;
         }
 
-        public bool InsertProduct(string productCode, string productName, string category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note)
+        public bool InsertProduct(string productCode, string productName, int category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note, int supplierId)
         {
-            string query = string.Format("INSERT INTO dbo.Product (productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note) " +
-                "VALUES ('{0}', '{1}', '{2}', {3}, {4}, {5}, '{6}', '{7}', {8}, '{9}')", productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived.ToString("yyyy-MM-dd HH:mm:ss"), dateOutOfStock?.ToString("yyyy-MM-dd HH:mm:ss"), reOrderLevel, note);
+            string query = string.Format("INSERT INTO dbo.Product (productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplierId ) " +
+                "VALUES ('{0}', '{1}', '{2}', {3}, {4}, {5}, '{6}', '{7}', {8}, '{9}', '{10}')", productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived.ToString("yyyy-MM-dd HH:mm:ss"), dateOutOfStock?.ToString("yyyy-MM-dd HH:mm:ss"), reOrderLevel, note, supplierId);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
 
-        public bool UpdateProduct(int id, string productCode, string productName, string category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note)
+        public bool UpdateProduct(int id, string productCode, string productName, int category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note, int supplierId)
         {
-            string query = "UPDATE dbo.Product SET productCode = @ProductCode, productName = @ProductName, category = @Category, unitPrice = @UnitPrice, quantityInStock = @QuantityInStock, quantitySold = @QuantitySold, dateStockReceived = @DateStockReceived, dateOutOfStock = @DateOutOfStock, reOrderLevel = @ReOrderLevel, note = @Note WHERE id = @ID";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, id });
+            string query = string.Format("UPDATE dbo.Product SET productCode = '{0}', productName = '{1}', categoryId = {2}, unitPrice = {3}, quantityInStock = {4}, quantitySold = {5}, dateStockReceived = '{6}', dateOutOfStock = '{7}', reOrderLevel = {8}, note = '{9}', supplierId={10} WHERE id = {11}", productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived.ToString("yyyy-MM-dd HH:mm:ss"), dateOutOfStock?.ToString("yyyy-MM-dd HH:mm:ss"), reOrderLevel, note, supplierId,  id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
 
-        public bool UpdateProduct1(int productId, string productCode, string productName, string category, double unitPrice, int quantityInStock, string note)
-        {
-            string query = "UPDATE dbo.Product SET productCode = @ProductCode, productName = @ProductName, category = @Category, unitPrice = @UnitPrice, quantityInStock = @QuantityInStock, note = @Note WHERE id = @ID";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { productCode, productName, category, unitPrice, quantityInStock, note, productId });
-            return result > 0;
-        }
+
+
         public bool DeleteProduct(int id)
         {
             string query = string.Format("DELETE FROM dbo.Product WHERE id = {0}", id);
@@ -180,7 +176,7 @@ namespace Management.DAO
                 int id = Convert.ToInt32(row["id"]);
                 string productCode = row["productCode"].ToString();
                 string productName = row["productName"].ToString();
-                string category = row["category"].ToString();
+                int category = Convert.ToInt32(row["categoryId"]);
                 double unitPrice = Convert.ToDouble(row["unitPrice"]);
                 int quantityInStock = Convert.ToInt32(row["quantityInStock"]);
                 int quantitySold = Convert.ToInt32(row["quantitySold"]);
@@ -188,8 +184,9 @@ namespace Management.DAO
                 DateTime? dateOutOfStock = row["dateOutOfStock"] as DateTime?;
                 int? reOrderLevel = row["reOrderLevel"] as int?;
                 string note = row["note"].ToString();
+                int supplierId = Convert.ToInt32(row["supplierId"]);
 
-                return new Product(id, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note);
+                return new Product(id, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplierId);
             }
 
             return null;
