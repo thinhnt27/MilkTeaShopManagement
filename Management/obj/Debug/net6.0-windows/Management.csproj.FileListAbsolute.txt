@@ -163,3 +163,6 @@ C:\Users\sontv\Documents\Desktop\CCC\GIT\MilkTeaShopManagement\Management\obj\De
 C:\Users\sontv\Documents\Desktop\CCC\GIT\MilkTeaShopManagement\Management\obj\Debug\net6.0-windows\Management.Form1.resources
 C:\Users\sontv\Documents\Desktop\CCC\GIT\MilkTeaShopManagement\Management\obj\Debug\net6.0-windows\Management.fWareHouse.resources
 C:\Users\sontv\Documents\Desktop\CCC\GIT\MilkTeaShopManagement\Management\obj\Debug\net6.0-windows\Management.fProductDetail.resources
+D:\Thinh\Term5\PRN211\Assignment\Management\Management\obj\Debug\net6.0-windows\Management.Form1.resources
+D:\Thinh\Term5\PRN211\Assignment\Management\Management\obj\Debug\net6.0-windows\Management.fProductDetail.resources
+D:\Thinh\Term5\PRN211\Assignment\Management\Management\obj\Debug\net6.0-windows\Management.fWareHouse.resources
