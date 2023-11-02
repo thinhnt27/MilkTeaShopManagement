@@ -13,15 +13,42 @@ namespace Management
 
         public fSupplierManagement()
         {
-            DateTimePicker dateTimeDEBT = new DateTimePicker();
-            DateTimePicker dateTimePay = new DateTimePicker();
-            dateTimeDEBT.ValueChanged += new EventHandler(dateTimeDEBT_ValueChanged);
-            dateTimePay.ValueChanged += new EventHandler(dateTimePay_ValueChanged);
             InitializeComponent();
-            this.Load += new System.EventHandler(this.fRevenue_Load);
+            LoadDataS();
             dgvSupplierList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
+        public void LoadDataS()
+        {
+            List<Supplier> supplierList = SupplierDAO.Instance.GetListSupplier();
+
+            if (supplierList.Any())
+            {
+                int lastId = supplierList.Max(p => p.Id);
+
+            }
+
+            dgvSupplierList.AutoGenerateColumns = false;
+            dgvSupplierList.Columns.Clear();
+
+            dgvSupplierList.Columns.Add("Id", "ID");
+            dgvSupplierList.Columns.Add("Name", "Name");
+            dgvSupplierList.Columns.Add("Email", "Email");
+            dgvSupplierList.Columns.Add("Address", "Address");
+            dgvSupplierList.Columns.Add("Phone", "Phone");
+            dgvSupplierList.Columns.Add("TotalPurchases", "Total Purchases");
+            dgvSupplierList.Columns.Add("Quantity", "Quantity");
+
+            dgvSupplierList.Columns["Id"].DataPropertyName = "Id";
+            dgvSupplierList.Columns["Name"].DataPropertyName = "Name";
+            dgvSupplierList.Columns["Email"].DataPropertyName = "Email";
+            dgvSupplierList.Columns["Address"].DataPropertyName = "Address";
+            dgvSupplierList.Columns["Phone"].DataPropertyName = "Phone";
+            dgvSupplierList.Columns["TotalPurchases"].DataPropertyName = "TotalPurchases";
+            dgvSupplierList.Columns["Quantity"].DataPropertyName = "Quantity";
+
+            dgvSupplierList.DataSource = supplierList;
+        }
         private void fRevenue_Load(object sender, EventArgs e)
         {
             List<Supplier> supplierList = SupplierDAO.Instance.GetListSupplier();
@@ -56,64 +83,78 @@ namespace Management
         {
             try
             {
-                // Get input values from the form
                 string name = txtDonViCC.Text;
                 string email = txtEmail.Text;
                 string address = txtDiaChi.Text;
                 string phone = txtDienThoai.Text;
-                double totalPurchases;
+                double totalPurchases = 0;
+                int quantity = 0;
                 double debt = 0;
-                if (Double.TryParse(txtTienNhapHang.Text, out totalPurchases) && Double.TryParse(txtTienNo.Text, out debt))
+
+                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(address) || string.IsNullOrWhiteSpace(phone))
                 {
-                    totalPurchases = Convert.ToDouble(txtTienNhapHang.Text);
-                    debt = Convert.ToDouble(txtTienNo.Text);
-                }
-                else
-                {
-                    MessageBox.Show("Số tiền không hợp lệ");
+                    MessageBox.Show("Please fill in all the information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 if (!IsEmailValid(email))
                 {
-                    MessageBox.Show("Địa chỉ email không hợp lệ.");
+                    MessageBox.Show("Invalid email address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 if (!IsPhoneNumberValid(phone))
                 {
-                    MessageBox.Show("Số điện thoại không hợp lệ. Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 chữ số.");
+                    MessageBox.Show("Invalid phone number. Phone number must start with 0 and have exactly 10 digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (SupplierDAO.Instance.IsSupplierNameExist(name))
+                {
+                    MessageBox.Show("Supplier name already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                DateTime dateDebt = dateTimeDEBT.Value;
-                DateTime datePaid = dateTimePay.Value;
-                int quantity = Convert.ToInt32(txtHangNhap.Text);
-                // Insert the product into the database
-                bool result = SupplierDAO.Instance.InsertSupplier(name, email, address, phone, totalPurchases, debt, dateDebt, datePaid, quantity);
+                if (SupplierDAO.Instance.IsEmailExist(email))
+                {
+                    MessageBox.Show("Email already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (SupplierDAO.Instance.IsAddressExist(address))
+                {
+                    MessageBox.Show("Address already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (SupplierDAO.Instance.IsPhoneExist(phone))
+                {
+                    MessageBox.Show("Phone number already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                bool result = SupplierDAO.Instance.InsertSupplier(name, email, address, phone, totalPurchases, quantity);
 
                 if (result)
                 {
-                    MessageBox.Show("Nhà cung cấp được thêm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Supplier added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ResetDataGridView();
                 }
                 else
                 {
-                    MessageBox.Show("Không thể thêm nhà cung cấp.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to add the supplier.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
 
-            private void ResetDataGridView()
+
+        private void ResetDataGridView()
         {
-            dgvSupplierList.DataSource = null; // Clear the DataSource
-            dgvSupplierList.Rows.Clear(); // Clear all the rows
+            dgvSupplierList.DataSource = null;
+            dgvSupplierList.Rows.Clear();
             fRevenue_Load(this, EventArgs.Empty);
         }
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
@@ -123,10 +164,10 @@ namespace Management
 
         private void btnTim_Click(object sender, EventArgs e)
         {
-            string searchValue = txtTimKiem.Text.Trim(); // Lấy giá trị từ ô tìm kiếm
+            string searchValue = txtTimKiem.Text.Trim();
             if (string.IsNullOrEmpty(searchValue))
             {
-                MessageBox.Show("Vui lòng nhập giá trị để tìm kiếm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a value to search.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -136,7 +177,6 @@ namespace Management
                 List<Supplier> resultList = new List<Supplier>();
                 foreach (Supplier supplier in supplierList)
                 {
-                    // Tìm kiếm theo tên, email, địa chỉ hoặc số điện thoại
                     if (supplier.Name.Contains(searchValue) ||
                         supplier.Email.Contains(searchValue) ||
                         supplier.Address.Contains(searchValue) ||
@@ -145,19 +185,17 @@ namespace Management
                         resultList.Add(supplier);
                     }
                 }
-
-                // Hiển thị kết quả tìm kiếm trên DataGridView
                 dgvSupplierList.DataSource = null;
                 dgvSupplierList.DataSource = resultList;
 
                 if (resultList.Count == 0)
                 {
-                    MessageBox.Show("Không tìm thấy kết quả phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No matching results found.", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -182,17 +220,6 @@ namespace Management
 
         }
 
-
-        private void dateTimeDEBT_ValueChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("Ngày tháng nợ đã thay đổi: " + dateTimeDEBT.Value.ToString());
-        }
-
-        private void dateTimePay_ValueChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("Ngày tháng phải trả đã thay đổi: " + dateTimePay.Value.ToString());
-        }
-
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -212,32 +239,33 @@ namespace Management
                 if (selectedRow != null)
                 {
                     int id = Convert.ToInt32(selectedRow.Cells["Id"].Value);
-                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa nhà cung cấp này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Are you sure you want to delete this supplier?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         int supplierId = Convert.ToInt32(dgvSupplierList.SelectedRows[0].Cells["Id"].Value);
                         bool result = SupplierDAO.Instance.DeleteSupplier(id);
                         if (result)
                         {
-                            MessageBox.Show("Nhà cung cấp đã được xóa thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Supplier has been successfully deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ResetDataGridView();
                         }
                         else
                         {
-                            MessageBox.Show("Không thể xóa nhà cung cấp.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Unable to delete the supplier.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng chọn một nhà cung cấp để xóa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please select a supplier to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Có gì đó không đúng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnSua_Click(object sender, EventArgs e)
         {
@@ -246,9 +274,9 @@ namespace Management
                 DataGridViewRow selectedRow = dgvSupplierList.CurrentRow;
                 if (selectedRow != null)
                 {
-                    if (string.IsNullOrWhiteSpace(txtDonViCC.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtDiaChi.Text) || string.IsNullOrWhiteSpace(txtDienThoai.Text) || string.IsNullOrWhiteSpace(txtTienNhapHang.Text) || string.IsNullOrWhiteSpace(txtTienNo.Text))
+                    if (string.IsNullOrWhiteSpace(txtDonViCC.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtDiaChi.Text) || string.IsNullOrWhiteSpace(txtDienThoai.Text))
                     {
-                        MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Please fill in all the information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -257,42 +285,31 @@ namespace Management
                     string email = txtEmail.Text;
                     string address = txtDiaChi.Text;
                     string phone = txtDienThoai.Text;
-                    double totalPurchases;
-                    double debt = 0;
-                    if (Double.TryParse(txtTienNhapHang.Text, out totalPurchases) && Double.TryParse(txtTienNo.Text, out debt))
-                    {
-                        totalPurchases = Convert.ToDouble(txtTienNhapHang.Text);
-                        debt = Convert.ToDouble(txtTienNo.Text);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Số tiền không hợp lệ");
-                    }
-                    DateTime dateDebt = dateTimeDEBT.Value;
-                    DateTime datePaid = dateTimePay.Value;
-                    int quantity = Convert.ToInt32(txtHangNhap.Text);
-                    bool result = SupplierDAO.Instance.UpdateSupplier(id, name, email, address, phone, totalPurchases, debt, dateDebt, datePaid, quantity);
+                    double totalPurchases = 0;
+                    int quantity = 0;
+                    bool result = SupplierDAO.Instance.UpdateSupplier(id, name, email, address, phone, totalPurchases, quantity);
 
                     if (result)
                     {
-                        MessageBox.Show("Nhà cung cấp được cập nhật thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Supplier has been updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ResetDataGridView();
                     }
                     else
                     {
-                        MessageBox.Show("Không thể cập nhật nhà cung cấp.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Unable to update the supplier.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng chọn một nhà cung cấp để cập nhật.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please select a supplier to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -331,21 +348,6 @@ namespace Management
                         List<Supplier> sortList = supplierList.OrderBy(p => p.TotalPurchases).ToList();
                         dgvSupplierList.DataSource = sortList;
                     }
-                    else if (selectedValue == "Tiền nợ")
-                    {
-                        List<Supplier> sortList = supplierList.OrderBy(p => p.Debt).ToList();
-                        dgvSupplierList.DataSource = sortList;
-                    }
-                    else if (selectedValue == "Ngày nợ")
-                    {
-                        List<Supplier> sortList = supplierList.OrderBy(p => p.DateDebt).ToList();
-                        dgvSupplierList.DataSource = sortList;
-                    }
-                    else if (selectedValue == "Ngày phải trả")
-                    {
-                        List<Supplier> sortList = supplierList.OrderBy(p => p.DatePaid).ToList();
-                        dgvSupplierList.DataSource = sortList;
-                    }
 
                 }
                 catch (Exception ex)
@@ -379,6 +381,59 @@ namespace Management
         {
             string pattern = @"^0[0-9]{9}$";
             return Regex.IsMatch(phoneNumber, pattern);
+        }
+
+        private void dgvSupplierList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvSupplierList.Rows[e.RowIndex];
+                int supId = Convert.ToInt32(row.Cells["ID"].Value);
+                var fsupDetail = new fSupplierDetail(supId);
+                fsupDetail.ShowDialog();
+
+            }
+        }
+
+        private void dgvSupplierList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvSupplierList.Rows[e.RowIndex];
+                int supId = Convert.ToInt32(row.Cells["ID"].Value);
+                var fsupDetail = new fSupplierDetail(supId);
+                fsupDetail.ProductUpdated += ProductDetailForm_ProductUpdated;
+                fsupDetail.Show();
+                this.Close();
+
+
+
+            }
+
+
+
+        }
+
+        private void ProductDetailForm_ProductUpdated(object sender, EventArgs e)
+        {
+            LoadDataS();
+        }
+
+        private void dgvSupplierList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvSupplierList.Rows[e.RowIndex];
+                string id = row.Cells["ID"].Value.ToString();
+                string name = row.Cells["Name"].Value.ToString();
+                string email = row.Cells["Email"].Value.ToString();
+                string address = row.Cells["Address"].Value.ToString();
+                string phone = row.Cells["Phone"].Value.ToString();
+                txtDonViCC.Text = name;
+                txtEmail.Text = email;
+                txtDiaChi.Text = address;
+                txtDienThoai.Text = phone;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Management.DTO
 {
     public class Product
+
     {
         public Product(int id, string productCode, string productName, int category, double unitPrice, int quantityInStock, int quantitySold, DateTime dateStockReceived, DateTime? dateOutOfStock, int? reOrderLevel, string note, int supplierId)
         {
@@ -24,6 +25,7 @@ namespace Management.DTO
             this.Note = note;
             this.supplierId = supplierId;
         }
+       
 
         public Product(DataRow row)
         {

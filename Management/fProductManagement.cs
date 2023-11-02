@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,13 +15,13 @@ namespace Management
 {
     public partial class fProductManagement : Form
     {
-
+        public int SupplierId { get; set; }
         public fProductManagement()
         {
             InitializeComponent();
             var supllierList = SupplierDAO.Instance.GetListSupplier();
             cmbSupplier.DataSource = supllierList;
-            cmbSupplier.DisplayMember = "Name"; 
+            cmbSupplier.DisplayMember = "Name";
             cmbSupplier.ValueMember = "Id";
             var catorList = CategoryDAO.Instance.GetListCategory();
             cmbCategory.DataSource = catorList;
@@ -31,6 +32,7 @@ namespace Management
         }
         private void Load()
         {
+      
             List<Product> productList = ProductDAO.Instance.GetListProduct();
 
             // productList = productList.OrderByDescending(p => p.DateStockReceived).ToList();
@@ -47,34 +49,117 @@ namespace Management
             }
 
 
-            dgvProductList.DataSource = null;
-            dgvProductList.DataSource = productList;
+
+            List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+            List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+            var resultList = (from product in productList
+                              join sup in supplier on product.supplierId equals sup.Id
+                              join cat in categories on product.Category equals cat.ID
+                              select new NewProductList
+                              {
+                                  Id = product.Id,
+                                  ProductCode = product.ProductCode,
+                                  ProductName = product.ProductName,
+                                  Category = cat.Name,
+                                  UnitPrice = product.UnitPrice,
+                                  QuantityInStock = product.QuantityInStock,
+                                  QuantitySold = product.QuantitySold,
+                                  DateStockReceived = product.DateStockReceived,
+                                  DateOutOfStock = product.DateOutOfStock,
+                                  ReOrderLevel = product.ReOrderLevel,
+                                  Note = product.Note,
+                                  Name = sup.Name
+                              }).ToList();
+
+            dgvProductList.AutoGenerateColumns = false;
+            dgvProductList.Columns.Clear();
+
+            dgvProductList.Columns.Add("Id", "ID");
+            dgvProductList.Columns.Add("ProductCode", "Product Code");
+            dgvProductList.Columns.Add("ProductName", "Product Name");
+            dgvProductList.Columns.Add("Category", "Category");
+            dgvProductList.Columns.Add("UnitPrice", "Unit Price");
+            dgvProductList.Columns.Add("QuantityInStock", "Quantity In Stock");
+            dgvProductList.Columns.Add("QuantitySold", "Quantity Sold");
+            dgvProductList.Columns.Add("DateStockReceived", "Date Stock Received");
+            dgvProductList.Columns.Add("DateOutOfStock", "Date Out Of Stock");
+            dgvProductList.Columns.Add("ReOrderLevel", "Reorder Level");
+            dgvProductList.Columns.Add("Note", "Note");
+            dgvProductList.Columns.Add("Name", "Name");
+
+            dgvProductList.Columns["Id"].DataPropertyName = "Id";
+            dgvProductList.Columns["ProductCode"].DataPropertyName = "ProductCode";
+            dgvProductList.Columns["ProductName"].DataPropertyName = "ProductName";
+            dgvProductList.Columns["Category"].DataPropertyName = "Category";
+            dgvProductList.Columns["UnitPrice"].DataPropertyName = "UnitPrice";
+            dgvProductList.Columns["QuantityInStock"].DataPropertyName = "QuantityInStock";
+            dgvProductList.Columns["QuantitySold"].DataPropertyName = "QuantitySold";
+            dgvProductList.Columns["DateStockReceived"].DataPropertyName = "DateStockReceived";
+            dgvProductList.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
+            dgvProductList.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
+            dgvProductList.Columns["Note"].DataPropertyName = "Note";
+            dgvProductList.Columns["Name"].DataPropertyName = "Name";
+
+            dgvProductList.DataSource = resultList;
         }
 
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-           
+
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                // Get input values from the form
                 string productCode = txtProductCode.Text;
                 string productName = txtProductName.Text;
-                int category =Convert.ToInt32(cmbCategory.SelectedValue);
-                double unitPrice = Convert.ToDouble(txtUnitPrice.Text);
+                if (ProductDAO.Instance.IsProductCodeExists(productCode))
+                {
+                    MessageBox.Show("Product code already exists in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Regex regex = new Regex("^P\\d+$");
+                if (!regex.IsMatch(productCode))
+                {
+                    MessageBox.Show("Product code must start with 'P' followed by digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (ProductDAO.Instance.IsProductNameExists(productName))
+                {
+                    MessageBox.Show("Product name already exists in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(productName))
+                {
+                    MessageBox.Show("Product name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                int category;
+                if (!int.TryParse(cmbCategory.SelectedValue.ToString(), out category))
+                {
+                    MessageBox.Show("Please select a valid category.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                double unitPrice;
+                if (!double.TryParse(txtUnitPrice.Text, out unitPrice) || unitPrice <= 0)
+                {
+                    MessageBox.Show("Invalid unit price. Please enter a valid positive number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 int quantityInStock = 0;
                 int quantitySold = 0;
                 DateTime dateStockReceived = DateTime.Now;
                 DateTime? dateOutOfStock = null;
                 int reOrderLevel = 0;
                 string note = txtNote.Text;
-               int supplierId = Convert.ToInt32(cmbSupplier.Text);
-
-
-                // Insert the product into the database
+                int supplierId;
+                if (!int.TryParse(cmbSupplier.SelectedValue.ToString(), out supplierId))
+                {
+                    MessageBox.Show("Please select a valid supplier.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 bool result = ProductDAO.Instance.InsertProduct(productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplierId);
 
                 if (result)
@@ -90,7 +175,7 @@ namespace Management
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             ResetDataGridView();
         }
@@ -189,6 +274,12 @@ namespace Management
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+       
         }
 
         public delegate void ProductUpdatedEventHandler(object sender, EventArgs e);

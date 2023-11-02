@@ -14,7 +14,8 @@ namespace Management
             cmbCategory.DataSource = catorList;
             cmbCategory.DisplayMember = "Name";
             cmbCategory.ValueMember = "ID";
-            cmbCategory.SelectedIndex = 0;
+            Product product = ProductDAO.Instance.GetProductFromDatabase(productId);
+            cmbCategory.SelectedIndex = Convert.ToInt32(product.Category.ToString()) - 1;
             var supList = SupplierDAO.Instance.GetListSupplier();
             cmbSup.DataSource = supList;
             cmbSup.DisplayMember = "Name";
@@ -38,7 +39,6 @@ namespace Management
                 txtId.Text = product.Id.ToString();
                 txtProductCode.Text = product.ProductCode;
                 txtProductName.Text = product.ProductName;
-                cmbCategory.Text = product.Category.ToString();
                 txtUnitPrice.Text = product.UnitPrice.ToString();
                 txtQuantityInStock.Text = product.QuantityInStock.ToString();
                 txtQuantitySold.Text = product.QuantitySold.ToString();
@@ -127,7 +127,7 @@ namespace Management
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void txtReOrderLevel_TextChanged(object sender, EventArgs e)
@@ -178,6 +178,26 @@ namespace Management
         private void label13_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int productId = Convert.ToInt32(txtId.Text);
+
+            bool result = ProductDAO.Instance.DeleteProduct(productId);
+
+            if (result)
+            {
+                MessageBox.Show("Deleted successfully!");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error deleting product!");
+            }
+            fWareHouse fWareHouse = new fWareHouse();
+            fWareHouse.Show();
+            this.Close();
         }
     }
 }

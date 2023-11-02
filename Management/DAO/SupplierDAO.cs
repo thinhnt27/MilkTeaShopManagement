@@ -52,23 +52,23 @@ namespace Management.DAO
             return null;
         }
 
-        public bool InsertSupplier(string name, string email, string address, string phone, double totalPurchases, double debt, DateTime dateDebt, DateTime datePaid, int quantity)
+        public bool InsertSupplier(string name, string email, string address, string phone, double totalPurchases, int quantity)
         {
             using IDbConnection db = new SqlConnection(connectionString);
-            string query = "INSERT INTO dbo.Supplier (name, email, address, phone, totalPurchases, debt, dateDebt, datePaid, quantity) " +
-                           "VALUES (@Name, @Email, @Address, @Phone, @TotalPurchases, @Debt, @DateDebt, @DatePaid, @Quantity)";
-            var parameters = new { Name = name, Email = email, Address = address, Phone = phone, TotalPurchases = totalPurchases, Debt = debt, DateDebt = dateDebt, DatePaid = datePaid, Quantity = quantity };
+            string query = "INSERT INTO dbo.Supplier (name, email, address, phone, totalPurchases, quantity) " +
+                           "VALUES (@Name, @Email, @Address, @Phone, @TotalPurchases, @Quantity)";
+            var parameters = new { Name = name, Email = email, Address = address, Phone = phone, TotalPurchases = totalPurchases, Quantity = quantity };
             int result = db.Execute(query, parameters);
             return result > 0;
         }
 
 
 
-        public bool UpdateSupplier(int id, string name, string email, string address, string phone, double totalPurchases, double debt, DateTime dateDebt, DateTime datePaid, int quantity)
+        public bool UpdateSupplier(int id, string name, string email, string address, string phone, double totalPurchases, int quantity)
         {
             using IDbConnection db = new SqlConnection(connectionString);
-            string query = "UPDATE Supplier SET name = @Name, email = @Email, address = @Address, phone = @Phone, totalPurchases = @TotalPurchases, debt = @Debt, dateDebt = @DateDebt, datePaid = @DatePaid, quantity = @Quantity WHERE id = @ID";
-            var parameters = new { Name = name, Email = email, Address = address, Phone = phone, TotalPurchases = totalPurchases, Debt = debt, DateDebt = dateDebt, DatePaid = datePaid, Quantity = quantity, ID = id };
+            string query = "UPDATE Supplier SET name = @Name, email = @Email, address = @Address, phone = @Phone, totalPurchases = @TotalPurchases, quantity = @Quantity WHERE id = @ID";
+            var parameters = new { Name = name, Email = email, Address = address, Phone = phone, TotalPurchases = totalPurchases, Quantity = quantity, ID = id };
             int result = db.Execute(query, parameters);
             return result > 0;
         }
@@ -77,8 +77,10 @@ namespace Management.DAO
 
         public bool DeleteSupplier(int id)
         {
-            string query = string.Format("DELETE FROM Supplier WHERE id = {0}", id);
-            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            string deleteProductsQuery = string.Format("DELETE FROM Product WHERE supplierId = {0}", id);
+            DataProvider.Instance.ExecuteNonQuery(deleteProductsQuery);
+            string deleteSupplierQuery = string.Format("DELETE FROM Supplier WHERE id = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(deleteSupplierQuery);
             return result > 0;
         }
 
@@ -93,5 +95,46 @@ namespace Management.DAO
             string query = "SELECT * FROM Supplier ORDER BY id DESC";
             return DataProvider.Instance.ExecuteQuery(query);
         }
+
+
+
+
+        public bool IsSupplierNameExist(string name)
+        {
+            using IDbConnection db = new SqlConnection(connectionString);
+            string query = "SELECT COUNT(*) FROM Supplier WHERE name = @Name";
+            var parameters = new { Name = name };
+            int count = db.ExecuteScalar<int>(query, parameters);
+            return count > 0;
+        }
+
+        public bool IsEmailExist(string email)
+        {
+            using IDbConnection db = new SqlConnection(connectionString);
+            string query = "SELECT COUNT(*) FROM Supplier WHERE email = @Email";
+            var parameters = new { Email = email };
+            int count = db.ExecuteScalar<int>(query, parameters);
+            return count > 0;
+        }
+
+        public bool IsAddressExist(string address)
+        {
+            using IDbConnection db = new SqlConnection(connectionString);
+            string query = "SELECT COUNT(*) FROM Supplier WHERE address = @Address";
+            var parameters = new { Address = address };
+            int count = db.ExecuteScalar<int>(query, parameters);
+            return count > 0;
+        }
+
+        public bool IsPhoneExist(string phone)
+        {
+            using IDbConnection db = new SqlConnection(connectionString);
+            string query = "SELECT COUNT(*) FROM Supplier WHERE phone = @Phone";
+            var parameters = new { Phone = phone };
+            int count = db.ExecuteScalar<int>(query, parameters);
+            return count > 0;
+        }
+
+
     }
 }

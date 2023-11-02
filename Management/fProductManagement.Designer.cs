@@ -112,6 +112,7 @@
             cmbSupplier.Name = "cmbSupplier";
             cmbSupplier.Size = new Size(211, 28);
             cmbSupplier.TabIndex = 4;
+            cmbSupplier.SelectedIndexChanged += cmbSupplier_SelectedIndexChanged;
             // 
             // label12
             // 
