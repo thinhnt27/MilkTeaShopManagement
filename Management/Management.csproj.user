@@ -16,6 +16,12 @@
     <Compile Update="fProductDetail.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fProductManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fSupplierManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fTableManager.cs">
       <SubType>Form</SubType>
     </Compile>

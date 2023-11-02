@@ -9,9 +9,11 @@ namespace Management
         public fWareHouse()
         {
             InitializeComponent();
-            LoadDateTimePickerProduct();
-            LoadListProductByDate(dtpkFromDate.Value, dtpkToDate.Value);
-            LoadListProductByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, 1);
+
+            getAllDataGridView();
+          //  LoadDateTimePickerProduct();
+          //   LoadListProductByDate(dtpkFromDate.Value, dtpkToDate.Value);
+          //   LoadListProductByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, 1);
 
         }
 
@@ -26,6 +28,60 @@ namespace Management
             try
             {
                 dgvProduct.DataSource = ProductDAO.Instance.GetProductListByDateAndPage(checkIn, checkOut, pageNum);
+                List<Product> productList = ProductDAO.Instance.GetListProduct();
+                List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+                List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+                var resultList = (from product in productList
+                                  join sup in supplier on product.supplierId equals sup.Id
+                                  join cat in categories on product.Category equals cat.ID
+                                  select new NewProductList
+                                  {
+                                      Id = product.Id,
+                                      ProductCode = product.ProductCode,
+                                      ProductName = product.ProductName,
+                                      Category = cat.Name,
+                                      UnitPrice = product.UnitPrice,
+                                      QuantityInStock = product.QuantityInStock,
+                                      QuantitySold = product.QuantitySold,
+                                      DateStockReceived = product.DateStockReceived,
+                                      DateOutOfStock = product.DateOutOfStock,
+                                      ReOrderLevel = product.ReOrderLevel,
+                                      Note = product.Note,
+                                      Name = sup.Name
+                                  }).ToList();
+
+                dgvProduct.AutoGenerateColumns = false;
+                dgvProduct.Columns.Clear();
+
+                dgvProduct.Columns.Add("Id", "ID");
+                dgvProduct.Columns.Add("ProductCode", "Product Code");
+                dgvProduct.Columns.Add("ProductName", "Product Name");
+                dgvProduct.Columns.Add("Category", "Category");
+                dgvProduct.Columns.Add("UnitPrice", "Unit Price");
+                dgvProduct.Columns.Add("QuantityInStock", "Quantity In Stock");
+                dgvProduct.Columns.Add("QuantitySold", "Quantity Sold");
+                dgvProduct.Columns.Add("DateStockReceived", "Date Stock Received");
+                dgvProduct.Columns.Add("DateOutOfStock", "Date Out Of Stock");
+                dgvProduct.Columns.Add("ReOrderLevel", "Reorder Level");
+                dgvProduct.Columns.Add("Note", "Note");
+                dgvProduct.Columns.Add("Name", "Name");
+
+                dgvProduct.Columns["Id"].DataPropertyName = "Id";
+                dgvProduct.Columns["ProductCode"].DataPropertyName = "ProductCode";
+                dgvProduct.Columns["ProductName"].DataPropertyName = "ProductName";
+                dgvProduct.Columns["Category"].DataPropertyName = "Category";
+                dgvProduct.Columns["UnitPrice"].DataPropertyName = "UnitPrice";
+                dgvProduct.Columns["QuantityInStock"].DataPropertyName = "QuantityInStock";
+                dgvProduct.Columns["QuantitySold"].DataPropertyName = "QuantitySold";
+                dgvProduct.Columns["DateStockReceived"].DataPropertyName = "DateStockReceived";
+                dgvProduct.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
+                dgvProduct.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
+                dgvProduct.Columns["Note"].DataPropertyName = "Note";
+                dgvProduct.Columns["Name"].DataPropertyName = "Name";
+
+                dgvProduct.DataSource = resultList;
+
             }
             catch (Exception ex)
             {
@@ -44,12 +100,29 @@ namespace Management
         void LoadListProductByDate(DateTime checkIn, DateTime checkOut)
         {
             dgvProduct.DataSource = ProductDAO.Instance.GetProductListByDate(checkIn, checkOut);
-        }
-
-
-        private void getAllDataGridView()
-        {
             List<Product> productList = ProductDAO.Instance.GetListProduct();
+            List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+            List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+            var resultList = (from product in productList
+                              join sup in supplier on product.supplierId equals sup.Id
+                              join cat in categories on product.Category equals cat.ID
+                              select new NewProductList
+                              {
+                                  Id = product.Id,
+                                  ProductCode = product.ProductCode,
+                                  ProductName = product.ProductName,
+                                  Category = cat.Name,
+                                  UnitPrice = product.UnitPrice,
+                                  QuantityInStock = product.QuantityInStock,
+                                  QuantitySold = product.QuantitySold,
+                                  DateStockReceived = product.DateStockReceived,
+                                  DateOutOfStock = product.DateOutOfStock,
+                                  ReOrderLevel = product.ReOrderLevel,
+                                  Note = product.Note,
+                                  Name = sup.Name
+                              }).ToList();
+
             dgvProduct.AutoGenerateColumns = false;
             dgvProduct.Columns.Clear();
 
@@ -64,6 +137,7 @@ namespace Management
             dgvProduct.Columns.Add("DateOutOfStock", "Date Out Of Stock");
             dgvProduct.Columns.Add("ReOrderLevel", "Reorder Level");
             dgvProduct.Columns.Add("Note", "Note");
+            dgvProduct.Columns.Add("Name", "Name");
 
             dgvProduct.Columns["Id"].DataPropertyName = "Id";
             dgvProduct.Columns["ProductCode"].DataPropertyName = "ProductCode";
@@ -76,8 +150,69 @@ namespace Management
             dgvProduct.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
             dgvProduct.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
             dgvProduct.Columns["Note"].DataPropertyName = "Note";
+            dgvProduct.Columns["Name"].DataPropertyName = "Name";
 
-            dgvProduct.DataSource = productList;
+            dgvProduct.DataSource = resultList;
+
+        }
+
+
+        private void getAllDataGridView()
+        {
+            List<Product> productList = ProductDAO.Instance.GetListProduct();
+            List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+            List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+            var resultList = (from product in productList
+                              join sup in supplier on product.supplierId equals sup.Id
+                              join cat in categories on product.Category equals cat.ID
+                              select new NewProductList
+                              {
+                                  Id = product.Id,
+                                  ProductCode = product.ProductCode,
+                                  ProductName = product.ProductName,
+                                  Category = cat.Name,
+                                  UnitPrice = product.UnitPrice,
+                                  QuantityInStock = product.QuantityInStock,
+                                  QuantitySold = product.QuantitySold,
+                                  DateStockReceived = product.DateStockReceived,
+                                  DateOutOfStock = product.DateOutOfStock,
+                                  ReOrderLevel = product.ReOrderLevel,
+                                  Note = product.Note,
+                                  Name = sup.Name
+                              }).ToList();
+
+            dgvProduct.AutoGenerateColumns = false;
+            dgvProduct.Columns.Clear();
+
+            dgvProduct.Columns.Add("Id", "ID");
+            dgvProduct.Columns.Add("ProductCode", "Product Code");
+            dgvProduct.Columns.Add("ProductName", "Product Name");
+            dgvProduct.Columns.Add("Category", "Category");
+            dgvProduct.Columns.Add("UnitPrice", "Unit Price");
+            dgvProduct.Columns.Add("QuantityInStock", "Quantity In Stock");
+            dgvProduct.Columns.Add("QuantitySold", "Quantity Sold");
+            dgvProduct.Columns.Add("DateStockReceived", "Date Stock Received");
+            dgvProduct.Columns.Add("DateOutOfStock", "Date Out Of Stock");
+            dgvProduct.Columns.Add("ReOrderLevel", "Reorder Level");
+            dgvProduct.Columns.Add("Note", "Note");
+            dgvProduct.Columns.Add("Name", "Name");
+
+            dgvProduct.Columns["Id"].DataPropertyName = "Id";
+            dgvProduct.Columns["ProductCode"].DataPropertyName = "ProductCode";
+            dgvProduct.Columns["ProductName"].DataPropertyName = "ProductName";
+            dgvProduct.Columns["Category"].DataPropertyName = "Category";
+            dgvProduct.Columns["UnitPrice"].DataPropertyName = "UnitPrice";
+            dgvProduct.Columns["QuantityInStock"].DataPropertyName = "QuantityInStock";
+            dgvProduct.Columns["QuantitySold"].DataPropertyName = "QuantitySold";
+            dgvProduct.Columns["DateStockReceived"].DataPropertyName = "DateStockReceived";
+            dgvProduct.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
+            dgvProduct.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
+            dgvProduct.Columns["Note"].DataPropertyName = "Note";
+            dgvProduct.Columns["Name"].DataPropertyName = "Name";
+
+            dgvProduct.DataSource = resultList;
+
         }
 
 
@@ -142,14 +277,7 @@ namespace Management
         }
         private void SearchProductByCategory(string category)
         {
-            try
-            {
-                dgvProduct.DataSource = ProductDAO.Instance.GetProductByCategory(category);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while searching products by category: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+          
         }
 
         private void SearchProductByName(string productName)
@@ -157,6 +285,60 @@ namespace Management
             try
             {
                 dgvProduct.DataSource = ProductDAO.Instance.GetProductByName(productName);
+              
+                List<Product> productList = ProductDAO.Instance.GetListProduct();
+                List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+                List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+                var resultList = (from product in productList
+                                  join sup in supplier on product.supplierId equals sup.Id
+                                  join cat in categories on product.Category equals cat.ID
+                                  select new NewProductList
+                                  {
+                                      Id = product.Id,
+                                      ProductCode = product.ProductCode,
+                                      ProductName = product.ProductName,
+                                      Category = cat.Name,
+                                      UnitPrice = product.UnitPrice,
+                                      QuantityInStock = product.QuantityInStock,
+                                      QuantitySold = product.QuantitySold,
+                                      DateStockReceived = product.DateStockReceived,
+                                      DateOutOfStock = product.DateOutOfStock,
+                                      ReOrderLevel = product.ReOrderLevel,
+                                      Note = product.Note,
+                                      Name = sup.Name
+                                  }).ToList();
+
+                dgvProduct.AutoGenerateColumns = false;
+                dgvProduct.Columns.Clear();
+
+                dgvProduct.Columns.Add("Id", "ID");
+                dgvProduct.Columns.Add("ProductCode", "Product Code");
+                dgvProduct.Columns.Add("ProductName", "Product Name");
+                dgvProduct.Columns.Add("Category", "Category");
+                dgvProduct.Columns.Add("UnitPrice", "Unit Price");
+                dgvProduct.Columns.Add("QuantityInStock", "Quantity In Stock");
+                dgvProduct.Columns.Add("QuantitySold", "Quantity Sold");
+                dgvProduct.Columns.Add("DateStockReceived", "Date Stock Received");
+                dgvProduct.Columns.Add("DateOutOfStock", "Date Out Of Stock");
+                dgvProduct.Columns.Add("ReOrderLevel", "Reorder Level");
+                dgvProduct.Columns.Add("Note", "Note");
+                dgvProduct.Columns.Add("Name", "Name");
+
+                dgvProduct.Columns["Id"].DataPropertyName = "Id";
+                dgvProduct.Columns["ProductCode"].DataPropertyName = "ProductCode";
+                dgvProduct.Columns["ProductName"].DataPropertyName = "ProductName";
+                dgvProduct.Columns["Category"].DataPropertyName = "Category";
+                dgvProduct.Columns["UnitPrice"].DataPropertyName = "UnitPrice";
+                dgvProduct.Columns["QuantityInStock"].DataPropertyName = "QuantityInStock";
+                dgvProduct.Columns["QuantitySold"].DataPropertyName = "QuantitySold";
+                dgvProduct.Columns["DateStockReceived"].DataPropertyName = "DateStockReceived";
+                dgvProduct.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
+                dgvProduct.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
+                dgvProduct.Columns["Note"].DataPropertyName = "Note";
+                dgvProduct.Columns["Name"].DataPropertyName = "Name";
+
+                dgvProduct.DataSource = resultList;
             }
             catch (Exception ex)
             {
@@ -169,6 +351,61 @@ namespace Management
             try
             {
                 dgvProduct.DataSource = ProductDAO.Instance.GetProductByCode(productCode);
+              
+
+                List<Product> productList = ProductDAO.Instance.GetListProduct();
+                List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+                List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+                var resultList = (from product in productList
+                                  join sup in supplier on product.supplierId equals sup.Id
+                                  join cat in categories on product.Category equals cat.ID
+                                  select new NewProductList
+                                  {
+                                      Id = product.Id,
+                                      ProductCode = product.ProductCode,
+                                      ProductName = product.ProductName,
+                                      Category = cat.Name,
+                                      UnitPrice = product.UnitPrice,
+                                      QuantityInStock = product.QuantityInStock,
+                                      QuantitySold = product.QuantitySold,
+                                      DateStockReceived = product.DateStockReceived,
+                                      DateOutOfStock = product.DateOutOfStock,
+                                      ReOrderLevel = product.ReOrderLevel,
+                                      Note = product.Note,
+                                      Name = sup.Name
+                                  }).ToList();
+
+                dgvProduct.AutoGenerateColumns = false;
+                dgvProduct.Columns.Clear();
+
+                dgvProduct.Columns.Add("Id", "ID");
+                dgvProduct.Columns.Add("ProductCode", "Product Code");
+                dgvProduct.Columns.Add("ProductName", "Product Name");
+                dgvProduct.Columns.Add("Category", "Category");
+                dgvProduct.Columns.Add("UnitPrice", "Unit Price");
+                dgvProduct.Columns.Add("QuantityInStock", "Quantity In Stock");
+                dgvProduct.Columns.Add("QuantitySold", "Quantity Sold");
+                dgvProduct.Columns.Add("DateStockReceived", "Date Stock Received");
+                dgvProduct.Columns.Add("DateOutOfStock", "Date Out Of Stock");
+                dgvProduct.Columns.Add("ReOrderLevel", "Reorder Level");
+                dgvProduct.Columns.Add("Note", "Note");
+                dgvProduct.Columns.Add("Name", "Name");
+
+                dgvProduct.Columns["Id"].DataPropertyName = "Id";
+                dgvProduct.Columns["ProductCode"].DataPropertyName = "ProductCode";
+                dgvProduct.Columns["ProductName"].DataPropertyName = "ProductName";
+                dgvProduct.Columns["Category"].DataPropertyName = "Category";
+                dgvProduct.Columns["UnitPrice"].DataPropertyName = "UnitPrice";
+                dgvProduct.Columns["QuantityInStock"].DataPropertyName = "QuantityInStock";
+                dgvProduct.Columns["QuantitySold"].DataPropertyName = "QuantitySold";
+                dgvProduct.Columns["DateStockReceived"].DataPropertyName = "DateStockReceived";
+                dgvProduct.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
+                dgvProduct.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
+                dgvProduct.Columns["Note"].DataPropertyName = "Note";
+                dgvProduct.Columns["Name"].DataPropertyName = "Name";
+
+                dgvProduct.DataSource = resultList;
             }
             catch (Exception ex)
             {
@@ -180,6 +417,61 @@ namespace Management
         {
             string category = txtComboCategory.Text;
             SearchProductByCategory(category);
+    
+
+            List<Product> productList = ProductDAO.Instance.GetListProduct();
+            List<Supplier> supplier = SupplierDAO.Instance.GetListSupplier();
+            List<Category> categories = CategoryDAO.Instance.GetListCategory();
+
+            var resultList = (from product in productList
+                              join sup in supplier on product.supplierId equals sup.Id
+                              join cat in categories on product.Category equals cat.ID
+                              select new NewProductList
+                              {
+                                  Id = product.Id,
+                                  ProductCode = product.ProductCode,
+                                  ProductName = product.ProductName,
+                                  Category = cat.Name,
+                                  UnitPrice = product.UnitPrice,
+                                  QuantityInStock = product.QuantityInStock,
+                                  QuantitySold = product.QuantitySold,
+                                  DateStockReceived = product.DateStockReceived,
+                                  DateOutOfStock = product.DateOutOfStock,
+                                  ReOrderLevel = product.ReOrderLevel,
+                                  Note = product.Note,
+                                  Name = sup.Name
+                              }).ToList();
+
+            dgvProduct.AutoGenerateColumns = false;
+            dgvProduct.Columns.Clear();
+
+            dgvProduct.Columns.Add("Id", "ID");
+            dgvProduct.Columns.Add("ProductCode", "Product Code");
+            dgvProduct.Columns.Add("ProductName", "Product Name");
+            dgvProduct.Columns.Add("Category", "Category");
+            dgvProduct.Columns.Add("UnitPrice", "Unit Price");
+            dgvProduct.Columns.Add("QuantityInStock", "Quantity In Stock");
+            dgvProduct.Columns.Add("QuantitySold", "Quantity Sold");
+            dgvProduct.Columns.Add("DateStockReceived", "Date Stock Received");
+            dgvProduct.Columns.Add("DateOutOfStock", "Date Out Of Stock");
+            dgvProduct.Columns.Add("ReOrderLevel", "Reorder Level");
+            dgvProduct.Columns.Add("Note", "Note");
+            dgvProduct.Columns.Add("Name", "Name");
+
+            dgvProduct.Columns["Id"].DataPropertyName = "Id";
+            dgvProduct.Columns["ProductCode"].DataPropertyName = "ProductCode";
+            dgvProduct.Columns["ProductName"].DataPropertyName = "ProductName";
+            dgvProduct.Columns["Category"].DataPropertyName = "Category";
+            dgvProduct.Columns["UnitPrice"].DataPropertyName = "UnitPrice";
+            dgvProduct.Columns["QuantityInStock"].DataPropertyName = "QuantityInStock";
+            dgvProduct.Columns["QuantitySold"].DataPropertyName = "QuantitySold";
+            dgvProduct.Columns["DateStockReceived"].DataPropertyName = "DateStockReceived";
+            dgvProduct.Columns["DateOutOfStock"].DataPropertyName = "DateOutOfStock";
+            dgvProduct.Columns["ReOrderLevel"].DataPropertyName = "ReOrderLevel";
+            dgvProduct.Columns["Note"].DataPropertyName = "Note";
+            dgvProduct.Columns["Name"].DataPropertyName = "Name";
+
+            dgvProduct.DataSource = resultList;
         }
 
         private void btnSearchByName_Click(object sender, EventArgs e)
@@ -294,8 +586,8 @@ namespace Management
 
         private void btnGetProductDetail_Click(object sender, EventArgs e)
         {
-            //fProductDetail f = new fProductDetail();
-            //f.ShowDialog;
+            fProductManagement addProductForm = new fProductManagement();
+            addProductForm.Show(); // Show the AddProductForm
         }
 
         private void dgvProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -322,7 +614,11 @@ namespace Management
             LoadListProductByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, 1);
         }
 
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            fSupplierManagement supplierForm = new fSupplierManagement();
+            supplierForm.Show();
+        }
     }
 
 }

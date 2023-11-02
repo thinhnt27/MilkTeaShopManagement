@@ -31,11 +31,12 @@
             btnExit = new Button();
             btnUpdate = new Button();
             panel5 = new Panel();
+            label10 = new Label();
             txtUnitPrice = new TextBox();
             label5 = new Label();
             panel4 = new Panel();
-            cmbCategory = new ComboBox();
             label4 = new Label();
+            cmbSup = new ComboBox();
             panel3 = new Panel();
             txtProductName = new TextBox();
             label3 = new Label();
@@ -46,9 +47,11 @@
             txtNote = new TextBox();
             label6 = new Label();
             panel7 = new Panel();
+            label12 = new Label();
             txtQuantityInStock = new TextBox();
             label7 = new Label();
             panel8 = new Panel();
+            label14 = new Label();
             txtQuantitySold = new TextBox();
             label8 = new Label();
             panel2 = new Panel();
@@ -61,12 +64,13 @@
             txtDateOutOfStock = new TextBox();
             lblDateOutOfStock = new Label();
             panel11 = new Panel();
+            label13 = new Label();
             txtReOrderLevel = new TextBox();
             label11 = new Label();
-            label10 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
+            panel12 = new Panel();
+            label15 = new Label();
+            label16 = new Label();
+            cmbCategory = new ComboBox();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -78,6 +82,7 @@
             panel9.SuspendLayout();
             panel10.SuspendLayout();
             panel11.SuspendLayout();
+            panel12.SuspendLayout();
             SuspendLayout();
             // 
             // btnExit
@@ -110,6 +115,17 @@
             panel5.Size = new Size(520, 56);
             panel5.TabIndex = 12;
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.Location = new Point(371, 16);
+            label10.Name = "label10";
+            label10.Size = new Size(51, 24);
+            label10.TabIndex = 2;
+            label10.Text = "VNĐ";
+            label10.Click += label10_Click;
+            // 
             // txtUnitPrice
             // 
             txtUnitPrice.Location = new Point(154, 13);
@@ -136,15 +152,6 @@
             panel4.Size = new Size(523, 56);
             panel4.TabIndex = 11;
             // 
-            // cmbCategory
-            // 
-            cmbCategory.FormattingEnabled = true;
-            cmbCategory.Location = new Point(160, 10);
-            cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(348, 28);
-            cmbCategory.TabIndex = 1;
-            cmbCategory.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -154,6 +161,15 @@
             label4.Size = new Size(151, 24);
             label4.TabIndex = 0;
             label4.Text = "Loại Sản Phẩm";
+            // 
+            // cmbSup
+            // 
+            cmbSup.FormattingEnabled = true;
+            cmbSup.Location = new Point(216, 13);
+            cmbSup.Name = "cmbSup";
+            cmbSup.Size = new Size(287, 28);
+            cmbSup.TabIndex = 1;
+            cmbSup.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // panel3
             // 
@@ -249,6 +265,16 @@
             panel7.Size = new Size(520, 56);
             panel7.TabIndex = 13;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.Location = new Point(451, 19);
+            label12.Name = "label12";
+            label12.Size = new Size(65, 24);
+            label12.TabIndex = 20;
+            label12.Text = "/Hàng";
+            // 
             // txtQuantityInStock
             // 
             txtQuantityInStock.Location = new Point(218, 16);
@@ -276,6 +302,16 @@
             panel8.Name = "panel8";
             panel8.Size = new Size(520, 56);
             panel8.TabIndex = 15;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.Location = new Point(451, 13);
+            label14.Name = "label14";
+            label14.Size = new Size(65, 24);
+            label14.TabIndex = 21;
+            label14.Text = "/Hàng";
             // 
             // txtQuantitySold
             // 
@@ -390,6 +426,17 @@
             panel11.Size = new Size(520, 56);
             panel11.TabIndex = 19;
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.Location = new Point(466, 13);
+            label13.Name = "label13";
+            label13.Size = new Size(51, 24);
+            label13.TabIndex = 2;
+            label13.Text = "/Lần";
+            label13.Click += label13_Click;
+            // 
             // txtReOrderLevel
             // 
             txtReOrderLevel.HideSelection = false;
@@ -410,53 +457,49 @@
             label11.TabIndex = 0;
             label11.Text = "Số lần đã nhập hàng:";
             // 
-            // label10
+            // panel12
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(371, 16);
-            label10.Name = "label10";
-            label10.Size = new Size(51, 24);
-            label10.TabIndex = 2;
-            label10.Text = "VNĐ";
-            label10.Click += label10_Click;
+            panel12.Controls.Add(label15);
+            panel12.Controls.Add(cmbSup);
+            panel12.Controls.Add(label16);
+            panel12.Location = new Point(29, 632);
+            panel12.Name = "panel12";
+            panel12.Size = new Size(520, 56);
+            panel12.TabIndex = 20;
             // 
-            // label12
+            // label15
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(451, 19);
-            label12.Name = "label12";
-            label12.Size = new Size(65, 24);
-            label12.TabIndex = 20;
-            label12.Text = "/Hàng";
+            label15.AutoSize = true;
+            label15.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Location = new Point(466, 13);
+            label15.Name = "label15";
+            label15.Size = new Size(0, 24);
+            label15.TabIndex = 2;
             // 
-            // label13
+            // label16
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.Location = new Point(466, 13);
-            label13.Name = "label13";
-            label13.Size = new Size(51, 24);
-            label13.TabIndex = 2;
-            label13.Text = "/Lần";
-            label13.Click += label13_Click;
+            label16.AutoSize = true;
+            label16.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.Location = new Point(57, 10);
+            label16.Name = "label16";
+            label16.Size = new Size(153, 24);
+            label16.TabIndex = 0;
+            label16.Text = "Nhà Cung Cấp:";
             // 
-            // label14
+            // cmbCategory
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(451, 13);
-            label14.Name = "label14";
-            label14.Size = new Size(65, 24);
-            label14.TabIndex = 21;
-            label14.Text = "/Hàng";
+            cmbCategory.FormattingEnabled = true;
+            cmbCategory.Location = new Point(157, 10);
+            cmbCategory.Name = "cmbCategory";
+            cmbCategory.Size = new Size(351, 28);
+            cmbCategory.TabIndex = 21;
             // 
             // fProductDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(999, 839);
+            Controls.Add(panel12);
             Controls.Add(panel11);
             Controls.Add(panel10);
             Controls.Add(panel9);
@@ -495,6 +538,8 @@
             panel10.PerformLayout();
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
+            panel12.ResumeLayout(false);
+            panel12.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -539,5 +584,11 @@
         private Label label12;
         private Label label13;
         private Label label14;
+        private Panel panel12;
+        private Label label15;
+        public TextBox txtSupplier;
+        private Label label16;
+        private ComboBox comboBox1;
+        private ComboBox cmbSup;
     }
 }

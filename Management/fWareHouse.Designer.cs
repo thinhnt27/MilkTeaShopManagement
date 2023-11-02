@@ -40,6 +40,8 @@
             dtpkToDate = new DateTimePicker();
             dtpkFromDate = new DateTimePicker();
             groupBox2 = new GroupBox();
+            button2 = new Button();
+            button1 = new Button();
             btnGetProductsWithNotes = new Button();
             btnGetProductsWithZeroQuantity = new Button();
             btnResetSort = new Button();
@@ -55,8 +57,7 @@
             txtComboCategory = new ComboBox();
             btnSearchByCategory = new Button();
             btnGetProductDetail = new Button();
-            button1 = new Button();
-            button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -184,6 +185,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(button3);
             groupBox2.Controls.Add(button2);
             groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(btnGetProductsWithNotes);
@@ -208,6 +210,24 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "groupBox2";
             groupBox2.Enter += groupBox2_Enter;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(150, 548);
+            button2.Name = "button2";
+            button2.Size = new Size(98, 66);
+            button2.TabIndex = 30;
+            button2.Text = "Sản Phẩm đã hết hàng";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(44, 548);
+            button1.Name = "button1";
+            button1.Size = new Size(98, 66);
+            button1.TabIndex = 29;
+            button1.Text = "Sản Phẩm đã hết hàng";
+            button1.UseVisualStyleBackColor = true;
             // 
             // btnGetProductsWithNotes
             // 
@@ -341,37 +361,29 @@
             // 
             // btnGetProductDetail
             // 
-            btnGetProductDetail.Location = new Point(6, 620);
+            btnGetProductDetail.Location = new Point(44, 626);
             btnGetProductDetail.Name = "btnGetProductDetail";
-            btnGetProductDetail.Size = new Size(262, 95);
+            btnGetProductDetail.Size = new Size(98, 95);
             btnGetProductDetail.TabIndex = 0;
-            btnGetProductDetail.Text = "Quản lí Sản Phẩm trong kho";
+            btnGetProductDetail.Text = "Thêm sản phẩm ";
             btnGetProductDetail.UseVisualStyleBackColor = true;
             btnGetProductDetail.Click += btnGetProductDetail_Click;
             // 
-            // button1
+            // button3
             // 
-            button1.Location = new Point(44, 548);
-            button1.Name = "button1";
-            button1.Size = new Size(98, 66);
-            button1.TabIndex = 29;
-            button1.Text = "Sản Phẩm đã hết hàng";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(150, 548);
-            button2.Name = "button2";
-            button2.Size = new Size(98, 66);
-            button2.TabIndex = 30;
-            button2.Text = "Sản Phẩm đã hết hàng";
-            button2.UseVisualStyleBackColor = true;
+            button3.Location = new Point(154, 628);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 92);
+            button3.TabIndex = 31;
+            button3.Text = "Nhà cung cấp";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // fWareHouse
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1056, 770);
+            ClientSize = new Size(1056, 796);
             Controls.Add(groupBox1);
             Name = "fWareHouse";
             Text = "fWareHouse";
@@ -418,5 +430,6 @@
         private Button btnGetProductsWithZeroQuantity;
         private Button button2;
         private Button button1;
+        private Button button3;
     }
 }

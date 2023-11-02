@@ -10,6 +10,15 @@ namespace Management
             InitializeComponent();
             this.productId = productId;
             DisplayProductDetails(productId);
+            var catorList = CategoryDAO.Instance.GetListCategory();
+            cmbCategory.DataSource = catorList;
+            cmbCategory.DisplayMember = "Name";
+            cmbCategory.ValueMember = "ID";
+            cmbCategory.SelectedIndex = 0;
+            var supList = SupplierDAO.Instance.GetListSupplier();
+            cmbSup.DataSource = supList;
+            cmbSup.DisplayMember = "Name";
+            cmbSup.ValueMember = "ID";
         }
 
 
@@ -29,7 +38,7 @@ namespace Management
                 txtId.Text = product.Id.ToString();
                 txtProductCode.Text = product.ProductCode;
                 txtProductName.Text = product.ProductName;
-                cmbCategory.Text = product.Category;
+                cmbCategory.Text = product.Category.ToString();
                 txtUnitPrice.Text = product.UnitPrice.ToString();
                 txtQuantityInStock.Text = product.QuantityInStock.ToString();
                 txtQuantitySold.Text = product.QuantitySold.ToString();
@@ -67,12 +76,13 @@ namespace Management
             int productId = Convert.ToInt32(txtId.Text);
             string productCode = txtProductCode.Text;
             string productName = txtProductName.Text;
-            string category = cmbCategory.Text;
+            int category = Convert.ToInt32(cmbCategory.SelectedValue);
             double unitPrice = Convert.ToDouble(txtUnitPrice.Text);
             int quantityInStock = Convert.ToInt32(txtQuantityInStock.Text);
             int quantitySold = Convert.ToInt32(txtQuantitySold.Text);
             DateTime dateStockReceived = DateTime.Parse(txtDateStockReceived.Text);
             DateTime? dateOutOfStock = null;
+            int supplerId = Convert.ToInt32(cmbSup.SelectedValue);
             if (txtDateOutOfStock.Text != "N/A")
             {
                 dateOutOfStock = DateTime.Parse(txtDateOutOfStock.Text);
@@ -84,7 +94,7 @@ namespace Management
             }
             string note = txtNote.Text;
 
-            bool result = ProductDAO.Instance.UpdateProduct(productId, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note);
+            bool result = ProductDAO.Instance.UpdateProduct(productId, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplerId);
             if (result)
             {
                 MessageBox.Show("Product updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

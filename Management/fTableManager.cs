@@ -227,6 +227,12 @@ namespace Management
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
 
+
+            bool checkQuantity = ProductDAO.Instance.checkProductQuantity(cbFood.Text, count);
+            if (checkQuantity) {
+
+
+
             if (idBill == -1)
             {
                 BillDAO.Instance.InsertBill(table.ID);
@@ -238,6 +244,11 @@ namespace Management
             }
             ShowBill(table.ID);
             LoadTable();
+            }
+            else
+            {
+                MessageBox.Show("Sản phẩm không đủ số lượng trong kho hoặc hết.","Trạng thái",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
 

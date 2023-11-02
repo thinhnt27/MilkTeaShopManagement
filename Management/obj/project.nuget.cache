@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+djCBgU4Iq2oqYJTZcuQBZjoC6crCy5FmLeTJgOSqHOjEJzLtPJh54F8c6rFQQbMu2/tA5AlCMQq0n2AZb2V1g==",
+  "dgSpecHash": "ds6ajbODL/c4C80azSLZ6ovzi9u1za49vGaORpj8Nvj2KBvT/FqgwzWoBIEYTpDuGDOjWdXNW+6cGFJ+15/biw==",
   "success": true,
   "projectFilePath": "D:\\FPT-Ky5\\PRN191\\Project\\MilkTeaShopManagement\\Management\\Management.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\dapper\\2.1.15\\dapper.2.1.15.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
