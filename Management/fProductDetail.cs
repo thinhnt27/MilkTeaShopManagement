@@ -1,5 +1,6 @@
 ﻿using Management.DAO;
 using Management.DTO;
+using System.Text.RegularExpressions;
 
 namespace Management
 {
@@ -8,6 +9,8 @@ namespace Management
         public fProductDetail(int productId)
         {
             InitializeComponent();
+
+
             this.productId = productId;
             DisplayProductDetails(productId);
             var catorList = CategoryDAO.Instance.GetListCategory();
@@ -15,6 +18,11 @@ namespace Management
             cmbCategory.DisplayMember = "Name";
             cmbCategory.ValueMember = "ID";
             Product product = ProductDAO.Instance.GetProductFromDatabase(productId);
+            // check 
+            if (product.QuantityInStock > 0)
+            {
+                cmbSup.Enabled = false;
+            }
             cmbCategory.SelectedIndex = Convert.ToInt32(product.Category.ToString()) - 1;
             var supList = SupplierDAO.Instance.GetListSupplier();
             cmbSup.DataSource = supList;
@@ -44,22 +52,6 @@ namespace Management
                 txtQuantitySold.Text = product.QuantitySold.ToString();
                 txtDateStockReceived.Text = product.DateStockReceived.ToString();
                 txtDateOutOfStock.Text = product.DateOutOfStock?.ToString() ?? "N/A";
-                //    dtpDateStockReceived.Value = product.DateStockReceived;
-                // Check if DateOutOfStock is null
-                //   if (product.DateOutOfStock == null)
-                //    {
-                // dtpDateOutOfStock.CustomFormat = " ";
-                //   dtpDateOutOfStock.Format = DateTimePickerFormat.Custom;
-                //        dtpDateOutOfStock.Visible = false;
-                //        lblDateOutOfStock.Visible = false;
-                //    }
-                //     else
-                //     {
-                //         dtpDateOutOfStock.Visible = true;
-                //         lblDateOutOfStock.Visible = true;
-                //         dtpDateOutOfStock.Value = (DateTime)product.DateOutOfStock;
-                //     }
-                // Check if ReOrderLevel is null
                 if (product.ReOrderLevel == null)
                 {
                     txtReOrderLevel.Text = "N/A";
@@ -73,13 +65,55 @@ namespace Management
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            int productId = Convert.ToInt32(txtId.Text);
+            int productId;
+            if (!int.TryParse(txtId.Text, out productId) || productId <= 0)
+            {
+                MessageBox.Show("Invalid product ID. Please enter a valid positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string productCode = txtProductCode.Text;
+            if (string.IsNullOrWhiteSpace(productCode))
+            {
+                MessageBox.Show("Product code cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string productName = txtProductName.Text;
-            int category = Convert.ToInt32(cmbCategory.SelectedValue);
-            double unitPrice = Convert.ToDouble(txtUnitPrice.Text);
-            int quantityInStock = Convert.ToInt32(txtQuantityInStock.Text);
-            int quantitySold = Convert.ToInt32(txtQuantitySold.Text);
+            if (string.IsNullOrWhiteSpace(productName))
+            {
+                MessageBox.Show("Product name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int category;
+            if (!int.TryParse(cmbCategory.SelectedValue.ToString(), out category) || category <= 0)
+            {
+                MessageBox.Show("Please select a valid category.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            double unitPrice;
+            if (!double.TryParse(txtUnitPrice.Text, out unitPrice) || unitPrice <= 0)
+            {
+                MessageBox.Show("Invalid unit price. Please enter a valid positive number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int quantityInStock;
+            if (!int.TryParse(txtQuantityInStock.Text, out quantityInStock) || quantityInStock < 0)
+            {
+                MessageBox.Show("Invalid quantity in stock. Please enter a valid non-negative integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int quantitySold;
+            if (!int.TryParse(txtQuantitySold.Text, out quantitySold) || quantitySold < 0)
+            {
+                MessageBox.Show("Invalid quantity sold. Please enter a valid non-negative integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             DateTime dateStockReceived = DateTime.Parse(txtDateStockReceived.Text);
             DateTime? dateOutOfStock = null;
             int supplerId = Convert.ToInt32(cmbSup.SelectedValue);
@@ -93,12 +127,15 @@ namespace Management
                 reOrderLevel = Convert.ToInt32(txtReOrderLevel.Text);
             }
             string note = txtNote.Text;
-
-            bool result = ProductDAO.Instance.UpdateProduct(productId, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplerId);
-            if (result)
+            DialogResult dialogResult = MessageBox.Show("Product will be UPDATED. Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("Product updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ProductUpdated?.Invoke(this, EventArgs.Empty);
+                bool result = ProductDAO.Instance.UpdateProduct(productId, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplerId);
+                if (result)
+                {
+                    MessageBox.Show("Product updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ProductUpdated?.Invoke(this, EventArgs.Empty);
+                }
             }
             else
             {
@@ -183,21 +220,20 @@ namespace Management
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int productId = Convert.ToInt32(txtId.Text);
-
-            bool result = ProductDAO.Instance.DeleteProduct(productId);
-
-            if (result)
+            DialogResult dialogResult = MessageBox.Show("Product will be DELETED. Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("Deleted successfully!");
-                this.Close();
+                bool result = ProductDAO.Instance.DeleteProduct(productId);
+                if (result)
+                {
+                    MessageBox.Show("Deleted successfully!");
+                    this.Close();
+                    fWareHouse fWareHouse = new fWareHouse();
+                    fWareHouse.Show();
+                    this.Close();
+                }
             }
-            else
-            {
-                MessageBox.Show("Error deleting product!");
-            }
-            fWareHouse fWareHouse = new fWareHouse();
-            fWareHouse.Show();
-            this.Close();
+
         }
     }
 }

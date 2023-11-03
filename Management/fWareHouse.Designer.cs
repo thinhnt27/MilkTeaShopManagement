@@ -204,7 +204,6 @@
             groupBox2.Size = new Size(281, 726);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
             groupBox2.Enter += groupBox2_Enter;
             // 
             // button3

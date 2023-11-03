@@ -42,9 +42,9 @@
             btnXoa = new Button();
             Exit = new Button();
             btnTim = new Button();
-            comboBox1 = new ComboBox();
             txtTimKiem = new TextBox();
             label10 = new Label();
+            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvSupplierList).BeginInit();
             SuspendLayout();
             // 
@@ -180,16 +180,6 @@
             btnTim.UseVisualStyleBackColor = true;
             btnTim.Click += btnTim_Click;
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Tên nhà cung cấp", "Email", "Địa chỉ", "Điện thoại", "Tiền nhập hàng" });
-            comboBox1.Location = new Point(1164, 299);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 15;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
             // txtTimKiem
             // 
             txtTimKiem.Location = new Point(1048, 63);
@@ -206,6 +196,18 @@
             label10.Size = new Size(96, 20);
             label10.TabIndex = 25;
             label10.Text = "Sắp xếp theo";
+            label10.Visible = false;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Tên nhà cung cấp", "Email", "Địa chỉ", "Điện thoại", "Tiền nhập hàng" });
+            comboBox1.Location = new Point(1164, 299);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 15;
+            comboBox1.Visible = false;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // fSupplierManagement
             // 
@@ -251,9 +253,9 @@
         private Button btnXoa;
         private Button Exit;
         private Button btnTim;
-        private ComboBox comboBox1;
         private TextBox txtTimKiem;
-        private Label label10;
         private DataGridView dgvSupplierList;
+        private Label label10;
+        private ComboBox comboBox1;
     }
 }

@@ -18,7 +18,7 @@ namespace Management
             cmbCa.DataSource = categories;
             cmbCa.DisplayMember = "Name";
             cmbCa.ValueMember = "ID";
-            cmbCa.SelectedIndex = 0;
+            cmbCa.SelectedIndex = -1;
 
         }
 
@@ -977,7 +977,6 @@ namespace Management
         {
             fProductManagement addProductForm = new fProductManagement();
             addProductForm.Show();
-            
         }
 
         private void dgvProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

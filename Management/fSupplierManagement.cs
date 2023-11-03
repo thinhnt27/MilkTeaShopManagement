@@ -49,7 +49,7 @@ namespace Management
 
             dgvSupplierList.DataSource = supplierList;
         }
-        private void fRevenue_Load(object sender, EventArgs e)
+        public void fRevenue_Load(object sender, EventArgs e)
         {
             List<Supplier> supplierList = SupplierDAO.Instance.GetListSupplier();
             supplierList = supplierList.OrderByDescending(p => p.Id).ToList();
@@ -131,13 +131,18 @@ namespace Management
                     MessageBox.Show("Phone number already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                bool result = SupplierDAO.Instance.InsertSupplier(name, email, address, phone, totalPurchases, quantity);
-
-                if (result)
+                DialogResult dialogResult = MessageBox.Show("Supplier will be ADDED. Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    MessageBox.Show("Supplier added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ResetDataGridView();
+                    bool result = SupplierDAO.Instance.InsertSupplier(name, email, address, phone, totalPurchases, quantity);
+
+                    if (result)
+                    {
+                        MessageBox.Show("Supplier added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ResetDataGridView();
+                    }
                 }
+
                 else
                 {
                     MessageBox.Show("Failed to add the supplier.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -151,7 +156,7 @@ namespace Management
 
 
 
-        private void ResetDataGridView()
+        public void ResetDataGridView()
         {
             dgvSupplierList.DataSource = null;
             dgvSupplierList.Rows.Clear();
@@ -287,6 +292,47 @@ namespace Management
                     string phone = txtDienThoai.Text;
                     double totalPurchases = 0;
                     int quantity = 0;
+                    if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(address) || string.IsNullOrWhiteSpace(phone))
+                    {
+                        MessageBox.Show("Please fill in all the information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (!IsEmailValid(email))
+                    {
+                        MessageBox.Show("Invalid email address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (!IsPhoneNumberValid(phone))
+                    {
+                        MessageBox.Show("Invalid phone number. Phone number must start with 0 and have exactly 10 digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (SupplierDAO.Instance.IsSupplierNameExist(name))
+                    {
+                        MessageBox.Show("Supplier name already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (SupplierDAO.Instance.IsEmailExist(email))
+                    {
+                        MessageBox.Show("Email already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (SupplierDAO.Instance.IsAddressExist(address))
+                    {
+                        MessageBox.Show("Address already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (SupplierDAO.Instance.IsPhoneExist(phone))
+                    {
+                        MessageBox.Show("Phone number already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     bool result = SupplierDAO.Instance.UpdateSupplier(id, name, email, address, phone, totalPurchases, quantity);
 
                     if (result)
@@ -391,7 +437,7 @@ namespace Management
                 int supId = Convert.ToInt32(row.Cells["ID"].Value);
                 var fsupDetail = new fSupplierDetail(supId);
                 fsupDetail.ShowDialog();
-
+                this.Close();
             }
         }
 

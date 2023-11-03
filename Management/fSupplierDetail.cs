@@ -178,11 +178,18 @@ namespace Management
             }
             double totalPurchases = supplier1.TotalPurchases;
             int quantity = supplier1.Quantity;
-            bool result = SupplierDAO.Instance.UpdateSupplier(id, name, email, address, phone, totalPurchases, quantity);
-            if (result)
+            DialogResult dialogResult = MessageBox.Show("Supplier will be UPDATED. Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("Supplier updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ProductUpdated?.Invoke(this, EventArgs.Empty);
+                bool result = SupplierDAO.Instance.UpdateSupplier(id, name, email, address, phone, totalPurchases, quantity);
+                if (result)
+                {
+                    MessageBox.Show("Supplier updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ProductUpdated?.Invoke(this, EventArgs.Empty);
+                    this.Close();
+                    fSupplierManagement f = new fSupplierManagement();
+                    f.Show();
+                }
             }
             else
             {
@@ -201,71 +208,80 @@ namespace Management
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int quantity;
-            if (!int.TryParse(txtQuantity.Text, out quantity) || quantity <= 0)
+            if (!string.IsNullOrEmpty(txtQuantity.Text) && cmbProdcut.SelectedIndex >= 0)
             {
-                MessageBox.Show("Invalid quantity. Please enter a valid positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            int selectedProduct;
-            if (!int.TryParse(cmbProdcut.SelectedValue.ToString(), out selectedProduct))
-            {
-                MessageBox.Show("Please select a valid product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            Product product = ProductDAO.Instance.GetProductById(selectedProduct);
-
-            if (product != null)
-            {
-                var resultQuantity = product.QuantityInStock + quantity;
-                var resultReOrderLevel = product.ReOrderLevel + 1;
-                var resultTotalPurchase = product.UnitPrice * quantity + supplier1.TotalPurchases;
-
-                int productId = product.Id;
-                string productCode = product.ProductCode;
-                string productName = product.ProductName;
-                int category = product.Category;
-                double unitPrice = product.UnitPrice;
-                int quantityInStock = resultQuantity;
-                int quantitySold = product.QuantitySold;
-                DateTime dateStockReceived = DateTime.Now;
-                DateTime? dateOutOfStock = product.DateOutOfStock;
-                int? reOrderLevel = resultReOrderLevel;
-                string note = product.Note;
-                int supplerId = product.supplierId;
-
-                bool result1 = ProductDAO.Instance.UpdateProduct(productId, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplerId);
-
-                int id = supplier1.Id;
-                string names = supplier1.Name;
-                string email = supplier1.Email;
-                string address = supplier1.Address;
-                string phone = supplier1.Phone;
-                double totalPurchases = resultTotalPurchase;
-                int supQuantity = resultQuantity;
-
-                bool result2 = SupplierDAO.Instance.UpdateSupplier(id, names, email, address, phone, totalPurchases, supQuantity);
-                Load(supId);
-
-                if (result1 && result2)
+                int quantity;
+                if (!int.TryParse(txtQuantity.Text, out quantity) || quantity <= 0)
                 {
-                    MessageBox.Show("Product and supplier information updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Invalid quantity. Please enter a valid positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Failed to update product and supplier information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Invalid product selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
-            fSupplierManagement fSupplierManagement = new fSupplierManagement();
-            fSupplierManagement.Show();
-            this.Close();
+                int selectedProduct;
+                if (!int.TryParse(cmbProdcut.SelectedValue.ToString(), out selectedProduct))
+                {
+                    MessageBox.Show("Please select a valid product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Product product = ProductDAO.Instance.GetProductById(selectedProduct);
+                DialogResult dialogResult = MessageBox.Show("Product will be ADDED. Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (product != null)
+                    {
+                        var resultQuantity = product.QuantityInStock + quantity;
+                        var resultReOrderLevel = product.ReOrderLevel + 1;
+                        var resultTotalPurchase = product.UnitPrice * quantity + supplier1.TotalPurchases;
+
+                        int productId = product.Id;
+                        string productCode = product.ProductCode;
+                        string productName = product.ProductName;
+                        int category = product.Category;
+                        double unitPrice = product.UnitPrice;
+                        int quantityInStock = resultQuantity;
+                        int quantitySold = product.QuantitySold;
+                        DateTime dateStockReceived = DateTime.Now;
+                        DateTime? dateOutOfStock = product.DateOutOfStock;
+                        int? reOrderLevel = resultReOrderLevel;
+                        string note = product.Note;
+                        int supplerId = product.supplierId;
+
+                        bool result1 = ProductDAO.Instance.UpdateProduct(productId, productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplerId);
+
+                        int id = supplier1.Id;
+                        string names = supplier1.Name;
+                        string email = supplier1.Email;
+                        string address = supplier1.Address;
+                        string phone = supplier1.Phone;
+                        double totalPurchases = resultTotalPurchase;
+                        int supQuantity = resultQuantity;
+
+
+                        bool result2 = SupplierDAO.Instance.UpdateSupplier(id, names, email, address, phone, totalPurchases, supQuantity);
+                        Load(supId);
+
+                        if (result1 && result2)
+                        {
+                            MessageBox.Show("Product and supplier information updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                            fSupplierManagement f = new fSupplierManagement();
+                            f.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update product and supplier information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Invalid product selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+
+            }
         }
 
 
@@ -322,7 +338,12 @@ namespace Management
                 }
             }
         }
+        private void ResetDataGridView()
+        {
+            fSupplierManagement fsupplierManagement = new fSupplierManagement();
+            fsupplierManagement.Show();
 
+        }
 
         public delegate void ProductUpdatedEventHandler(object sender, EventArgs e);
         public event ProductUpdatedEventHandler ProductUpdated;

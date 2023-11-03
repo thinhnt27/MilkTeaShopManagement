@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace Management
 {
@@ -34,6 +35,14 @@ namespace Management
             string newpass = txbNewPass.Text;
             string reenterPass = txbReenterPassword.Text;
             string userName = txbUsername.Text;
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(password);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+            string hasPass = "";
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
 
             if (!newpass.Equals(reenterPass))
             {
@@ -41,7 +50,7 @@ namespace Management
             }
             else
             {
-                if (AccountDAO.Instance.UpdateAccount(userName,displayName,password,newpass))
+                if (AccountDAO.Instance.UpdateAccount(userName,displayName,hasPass,newpass))
                 {
                     MessageBox.Show("Cập nhật thành công!");
                     if (updateAccount!= null)

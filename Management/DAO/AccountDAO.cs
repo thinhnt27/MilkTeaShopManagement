@@ -43,7 +43,15 @@ namespace Management.DAO
 
         public bool UpdateAccount(string userName, string displayName, string pass, string newPass)
         {
-            int result = DataProvider.Instance.ExecuteNonQuery("exec USP_UpdateAccount @userName , @displayName , @password , @newPassword", new object[] { userName, displayName, pass, newPass });
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(newPass);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+            
+            string hasNewPass = "";
+            foreach (byte item in hasData)
+            {
+                hasNewPass += item;
+            }
+            int result = DataProvider.Instance.ExecuteNonQuery("exec USP_UpdateAccount @userName , @displayName , @password , @newPassword", new object[] { userName, displayName, pass, hasNewPass });
             return result > 0;
         }
 

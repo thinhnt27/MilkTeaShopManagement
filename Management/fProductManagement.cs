@@ -32,7 +32,7 @@ namespace Management
         }
         private void Load()
         {
-      
+
             List<Product> productList = ProductDAO.Instance.GetListProduct();
 
             // productList = productList.OrderByDescending(p => p.DateStockReceived).ToList();
@@ -160,18 +160,22 @@ namespace Management
                     MessageBox.Show("Please select a valid supplier.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                bool result = ProductDAO.Instance.InsertProduct(productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplierId);
+                DialogResult dialogResult = MessageBox.Show("Product will be added. Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    bool result = ProductDAO.Instance.InsertProduct(productCode, productName, category, unitPrice, quantityInStock, quantitySold, dateStockReceived, dateOutOfStock, reOrderLevel, note, supplierId);
+                    if (result)
+                    {
+                        MessageBox.Show("Product added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ProductUpdated?.Invoke(this, EventArgs.Empty);
+                        Load();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to add the product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
 
-                if (result)
-                {
-                    MessageBox.Show("Product added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ProductUpdated?.Invoke(this, EventArgs.Empty);
-                    Load();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to add the product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
             catch (Exception ex)
             {
@@ -279,7 +283,7 @@ namespace Management
         private void cmbSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-       
+
         }
 
         public delegate void ProductUpdatedEventHandler(object sender, EventArgs e);
