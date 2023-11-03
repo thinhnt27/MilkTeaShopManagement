@@ -108,7 +108,7 @@
             cmbProdcut.Name = "cmbProdcut";
             cmbProdcut.Size = new Size(275, 28);
             cmbProdcut.TabIndex = 1;
-            cmbProdcut.SelectedIndexChanged += cmbProdcut_SelectedIndexChanged;
+            cmbProdcut.SelectedIndexChanged += txtQuantity_TextChanged;
             // 
             // label9
             // 

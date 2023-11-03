@@ -286,37 +286,40 @@ namespace Management
 
         private void txtQuantity_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(txtQuantity.Text, out int quantity) && quantity > 0)
+            if (!string.IsNullOrEmpty(txtQuantity.Text) && cmbProdcut.SelectedIndex >= 0)
             {
-                int selectedProduct;
-                if (int.TryParse(cmbProdcut.SelectedValue.ToString(), out selectedProduct))
+                if (int.TryParse(txtQuantity.Text, out int quantity) && quantity > 0)
                 {
-                    try
+                    int selectedProduct;
+                    if (int.TryParse(cmbProdcut.SelectedValue.ToString(), out selectedProduct))
                     {
-                        Product product = ProductDAO.Instance.GetProductById(selectedProduct);
-                        if (product != null)
+                        try
                         {
-                            var result = product.UnitPrice * quantity;
-                            textBox1.Text = result.ToString();
+                            Product product = ProductDAO.Instance.GetProductById(selectedProduct);
+                            if (product != null)
+                            {
+                                var result = product.UnitPrice * quantity;
+                                textBox1.Text = result.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid product selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Invalid product selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Please select a valid product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select a valid product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid quantity. Please enter a valid positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Invalid quantity. Please enter a valid positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
