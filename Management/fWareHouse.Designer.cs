@@ -40,8 +40,7 @@
             dtpkToDate = new DateTimePicker();
             dtpkFromDate = new DateTimePicker();
             groupBox2 = new GroupBox();
-            button2 = new Button();
-            button1 = new Button();
+            button3 = new Button();
             btnGetProductsWithNotes = new Button();
             btnGetProductsWithZeroQuantity = new Button();
             btnResetSort = new Button();
@@ -54,10 +53,9 @@
             label2 = new Label();
             btnSearchByName = new Button();
             label1 = new Label();
-            txtComboCategory = new ComboBox();
+            cmbCa = new ComboBox();
             btnSearchByCategory = new Button();
             btnGetProductDetail = new Button();
-            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -186,8 +184,6 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(button3);
-            groupBox2.Controls.Add(button2);
-            groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(btnGetProductsWithNotes);
             groupBox2.Controls.Add(btnGetProductsWithZeroQuantity);
             groupBox2.Controls.Add(btnResetSort);
@@ -200,7 +196,7 @@
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(btnSearchByName);
             groupBox2.Controls.Add(label1);
-            groupBox2.Controls.Add(txtComboCategory);
+            groupBox2.Controls.Add(cmbCa);
             groupBox2.Controls.Add(btnSearchByCategory);
             groupBox2.Controls.Add(btnGetProductDetail);
             groupBox2.Location = new Point(758, 15);
@@ -211,23 +207,15 @@
             groupBox2.Text = "groupBox2";
             groupBox2.Enter += groupBox2_Enter;
             // 
-            // button2
+            // button3
             // 
-            button2.Location = new Point(150, 548);
-            button2.Name = "button2";
-            button2.Size = new Size(98, 66);
-            button2.TabIndex = 30;
-            button2.Text = "Sản Phẩm đã hết hàng";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(44, 548);
-            button1.Name = "button1";
-            button1.Size = new Size(98, 66);
-            button1.TabIndex = 29;
-            button1.Text = "Sản Phẩm đã hết hàng";
-            button1.UseVisualStyleBackColor = true;
+            button3.Location = new Point(110, 640);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 75);
+            button3.TabIndex = 31;
+            button3.Text = "Nhà cung cấp";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // btnGetProductsWithNotes
             // 
@@ -340,14 +328,14 @@
             label1.TabIndex = 15;
             label1.Text = "Chọn Danh mục cần tìm\r\n";
             // 
-            // txtComboCategory
+            // cmbCa
             // 
-            txtComboCategory.FormattingEnabled = true;
-            txtComboCategory.Items.AddRange(new object[] { "Đồ Ăn", "Thức Uống", "Quà Tặng", "Khác" });
-            txtComboCategory.Location = new Point(13, 53);
-            txtComboCategory.Name = "txtComboCategory";
-            txtComboCategory.Size = new Size(151, 28);
-            txtComboCategory.TabIndex = 14;
+            cmbCa.FormattingEnabled = true;
+            cmbCa.Items.AddRange(new object[] { "Đồ Ăn", "Thức Uống", "Quà Tặng", "Khác" });
+            cmbCa.Location = new Point(13, 53);
+            cmbCa.Name = "cmbCa";
+            cmbCa.Size = new Size(151, 28);
+            cmbCa.TabIndex = 14;
             // 
             // btnSearchByCategory
             // 
@@ -361,23 +349,13 @@
             // 
             // btnGetProductDetail
             // 
-            btnGetProductDetail.Location = new Point(44, 626);
+            btnGetProductDetail.Location = new Point(110, 539);
             btnGetProductDetail.Name = "btnGetProductDetail";
             btnGetProductDetail.Size = new Size(98, 95);
             btnGetProductDetail.TabIndex = 0;
             btnGetProductDetail.Text = "Thêm sản phẩm ";
             btnGetProductDetail.UseVisualStyleBackColor = true;
             btnGetProductDetail.Click += btnGetProductDetail_Click;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(154, 628);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 92);
-            button3.TabIndex = 31;
-            button3.Text = "Nhà cung cấp";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // fWareHouse
             // 
@@ -415,7 +393,7 @@
         private Button btnFirstProductPage;
         private Button btnGetProductDetail;
         private Label label1;
-        private ComboBox txtComboCategory;
+        private ComboBox cmbCa;
         private Button btnSearchByCategory;
         private Label label3;
         private Button btnSearchByCode;
@@ -428,8 +406,6 @@
         private Button btnResetSort;
         private Button btnGetProductsWithNotes;
         private Button btnGetProductsWithZeroQuantity;
-        private Button button2;
-        private Button button1;
         private Button button3;
     }
 }

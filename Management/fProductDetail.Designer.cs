@@ -35,6 +35,7 @@
             txtUnitPrice = new TextBox();
             label5 = new Label();
             panel4 = new Panel();
+            cmbCategory = new ComboBox();
             label4 = new Label();
             cmbSup = new ComboBox();
             panel3 = new Panel();
@@ -70,7 +71,7 @@
             panel12 = new Panel();
             label15 = new Label();
             label16 = new Label();
-            cmbCategory = new ComboBox();
+            btnDelete = new Button();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -137,7 +138,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(44, 13);
+            label5.Location = new Point(35, 13);
             label5.Name = "label5";
             label5.Size = new Size(104, 24);
             label5.TabIndex = 0;
@@ -151,6 +152,14 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(523, 56);
             panel4.TabIndex = 11;
+            // 
+            // cmbCategory
+            // 
+            cmbCategory.FormattingEnabled = true;
+            cmbCategory.Location = new Point(157, 10);
+            cmbCategory.Name = "cmbCategory";
+            cmbCategory.Size = new Size(351, 28);
+            cmbCategory.TabIndex = 21;
             // 
             // label4
             // 
@@ -486,19 +495,22 @@
             label16.TabIndex = 0;
             label16.Text = "Nhà Cung Cấp:";
             // 
-            // cmbCategory
+            // btnDelete
             // 
-            cmbCategory.FormattingEnabled = true;
-            cmbCategory.Location = new Point(157, 10);
-            cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(351, 28);
-            cmbCategory.TabIndex = 21;
+            btnDelete.Location = new Point(704, 706);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 92);
+            btnDelete.TabIndex = 21;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // fProductDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(999, 839);
+            Controls.Add(btnDelete);
             Controls.Add(panel12);
             Controls.Add(panel11);
             Controls.Add(panel10);
@@ -590,5 +602,6 @@
         private Label label16;
         private ComboBox comboBox1;
         private ComboBox cmbSup;
+        private Button btnDelete;
     }
 }

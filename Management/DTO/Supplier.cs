@@ -5,7 +5,7 @@ namespace Management.DTO
 {
     public class Supplier
     {
-        public Supplier(int id, string name, string email, string address, string phone, double totalPurchases, double debt, DateTime dateDebt, DateTime datePaid, int quantity)
+        public Supplier(int id, string name, string email, string address, string phone, double totalPurchases, int quantity)
         {
             Id = id;
             Name = name;
@@ -13,9 +13,6 @@ namespace Management.DTO
             Address = address;
             Phone = phone;
             TotalPurchases = totalPurchases;
-            Debt = debt;
-            DateDebt = dateDebt;
-            DatePaid = datePaid;
             Quantity = quantity;
         }
 
@@ -27,9 +24,6 @@ namespace Management.DTO
             Address = row["address"].ToString();
             Phone = row["phone"].ToString();
             TotalPurchases = Convert.ToDouble(row["totalPurchases"]);
-            Debt = Convert.ToDouble(row["debt"]);
-            DateDebt = Convert.ToDateTime(row["dateDebt"]);
-            DatePaid = Convert.ToDateTime(row["datePaid"]);
             Quantity = Convert.ToInt32(row["quantity"]);
         }
 
@@ -39,9 +33,6 @@ namespace Management.DTO
         public string Address { get; set; }
         public string Phone { get; set; }
         public double TotalPurchases { get; set; }
-        public double Debt { get; set; }
-        public DateTime DateDebt { get; set; }
-        public DateTime DatePaid { get; set; }
         public int Quantity { get; set; }
     }
 }

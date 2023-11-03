@@ -169,3 +169,4 @@ D:\FPT-Ky5\PRN191\Project\MilkTeaShopManagement\Management\obj\Debug\net6.0-wind
 D:\FPT-Ky5\PRN191\Project\MilkTeaShopManagement\Management\obj\Debug\net6.0-windows\Management.fSupplierManagement.resources
 D:\FPT-Ky5\PRN191\Project\MilkTeaShopManagement\Management\bin\Debug\net6.0-windows\Dapper.dll
 D:\FPT-Ky5\PRN191\Project\MilkTeaShopManagement\Management\obj\Debug\net6.0-windows\Management.fProductManagement.resources
+D:\FPT-Ky5\PRN191\Project\MilkTeaShopManagement\Management\obj\Debug\net6.0-windows\Management.fSupplierDetail.resources

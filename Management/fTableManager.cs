@@ -227,30 +227,54 @@ namespace Management
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
 
-
-            bool checkQuantity = ProductDAO.Instance.checkProductQuantity(cbFood.Text, count);
-            if (checkQuantity) {
-
-
-
-            if (idBill == -1)
+            if (count > 0)
             {
-                BillDAO.Instance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), foodID, count);
+
+
+                int checkQuantity = ProductDAO.Instance.checkProductQuantity(cbFood.Text, count);
+                if (checkQuantity == 1)
+                {
+
+
+
+                    if (idBill == -1)
+                    {
+                        BillDAO.Instance.InsertBill(table.ID);
+                        BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), foodID, count);
+                        ProductDAO.Instance.updateQuantityInsertBill(count, cbFood.Text);
+                    }
+                    else
+                    {
+                        BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+                        ProductDAO.Instance.updateQuantityInsertBill(count, cbFood.Text);
+                    }
+                    ShowBill(table.ID);
+                    LoadTable();
+                }
+                else if (checkQuantity == 0)
+                {
+                    MessageBox.Show("Sản phẩm không đủ số lượng trong kho hoặc hết.", "Trạng thái", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (checkQuantity == -1)
+                {
+                    if (idBill == -1)
+                    {
+                        BillDAO.Instance.InsertBill(table.ID);
+                        BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), foodID, count);
+                    }
+                    else
+                    {
+                        BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+                    }
+                    ShowBill(table.ID);
+                    LoadTable();
+                }
             }
             else
             {
-                BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
-            }
-            ShowBill(table.ID);
-            LoadTable();
-            }
-            else
-            {
-                MessageBox.Show("Sản phẩm không đủ số lượng trong kho hoặc hết.","Trạng thái",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng chọn số lượng", "Trạng thái", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
 
         private void cbFood_SelectedIndexChanged(object sender, EventArgs e)
